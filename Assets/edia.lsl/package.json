@@ -19,6 +19,11 @@
   },
   },
   "samples": [
+    {
+      "displayName": "InOutlets",
+      "description": "Scene sending sphere position to LSL Outlet, cube listening to LSL inlet.",
+      "path": "Samples/InOutlets"
+   }
   ],
   "hideInEditor": false
 }
