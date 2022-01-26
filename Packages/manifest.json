@@ -8,6 +8,7 @@
     "com.unity.textmeshpro": "3.0.1",
     "com.unity.timeline": "1.4.6",
     "com.unity.ugui": "1.0.0",
+    "edia.core": "https://gitlab.gwdg.de/3dia/edia_framework.git?path=/Assets/eDIA",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

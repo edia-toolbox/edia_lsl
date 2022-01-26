@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using eDIA;
 using LSL;
 using UnityEngine;
-using ViveSR.anipal.Eye;
+// using ViveSR.anipal.Eye;
 
 public class LSL_EyeTrackingOutput : MonoBehaviour {
-
+/*
 	private StreamOutlet outlet	= null;
 	private StreamInfo streamInfo = null;
 	private float[] currentSample;
@@ -149,6 +149,6 @@ public class LSL_EyeTrackingOutput : MonoBehaviour {
 		// currentSample[2] = pos.z;
 		outlet.push_sample (currentSample);
 	}
-
 	#endregion // -------------------------------------------------------------------------------------------------------------------------------
+*/
 }
