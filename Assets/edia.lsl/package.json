@@ -1,0 +1,22 @@
+{
+  "name": "edia.lsl",
+  "displayName": "eDIA LSL package",
+  "version": "0.1.0",
+  "unity": "2020.3",
+  "description": "eDIA LSL functionalities for the eDIA framework",
+  "keywords": [
+    "eDIA",
+    "xr",
+    "vr",
+    "experiment",
+    "LSL"
+  ],
+  "author": {
+    "name": "eDIA"
+  },
+  "dependencies": {
+  },
+  "samples": [
+  ],
+  "hideInEditor": false
+}
