@@ -17,7 +17,6 @@
   "dependencies": {
     "edia.core": "https://gitlab.gwdg.de/3dia/edia_framework.git?path=/Assets/eDIA"
   },
-  },
   "samples": [
     {
       "displayName": "InOutlets",
