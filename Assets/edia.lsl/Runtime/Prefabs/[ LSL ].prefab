@@ -16,7 +16,7 @@ GameObject:
   m_Layer: 0
   m_Name: '[ LSL ]'
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 2800000, guid: 82176a4c2c43d644ea1a852ed5f279cd, type: 3}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -93,7 +93,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cadae11bffbd404797b932a529328bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StreamName: eDIA.Eyetracking
-  StreamType: eDIA.Eyetracking
-  StreamId: eDIA.Eyetracking
-  isStreaming: 0
