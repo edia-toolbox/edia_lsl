@@ -14,6 +14,8 @@ public class LSL_PositionRotationOutput : MonoBehaviour
     public string StreamType    = "";
     public string StreamId      = "";
 
+    public bool isThere = false;
+
     // Start is called before the first frame update
     void Start()
     {
