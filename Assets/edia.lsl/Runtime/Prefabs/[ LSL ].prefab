@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 1621685927253926409}
   - component: {fileID: 6424060423614774398}
   - component: {fileID: 5818316916597119068}
-  - component: {fileID: 4856196216018419556}
-  - component: {fileID: 703695653545874987}
   m_Layer: 0
   m_Name: '[ LSL ]'
   m_TagString: Untagged
@@ -28,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8417866798267382216}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.017474169, y: -0.052073058, z: 0.1808275}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -64,32 +62,3 @@ MonoBehaviour:
   StreamName: eDIA.MarkerStream
   StreamType: eDIA.MarkerStream
   StreamId: eDIA.MarkerStream.Markers
-  isStreaming: 0
---- !u!114 &4856196216018419556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8417866798267382216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c1c7891fc49cbe4ea99a98095bc4a25, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  zeObject: {fileID: 0}
-  StreamName: eDIA.PositionRotation
-  StreamType: eDIA.PositionRotation
-  StreamId: eDIA.PositionRotation.HMD
---- !u!114 &703695653545874987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8417866798267382216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cadae11bffbd404797b932a529328bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

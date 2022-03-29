@@ -1153,11 +1153,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4856196216018419556, guid: 4ad7e5209cda4a147a7fd9e07fa064f6,
+    - target: {fileID: 6424060423614774398, guid: 4ad7e5209cda4a147a7fd9e07fa064f6,
         type: 3}
-      propertyPath: zeObject
-      value: 
-      objectReference: {fileID: 925251692}
+      propertyPath: Note
+      value: Enables sending markers over LSL streams
+      objectReference: {fileID: 0}
     - target: {fileID: 8417866798267382216, guid: 4ad7e5209cda4a147a7fd9e07fa064f6,
         type: 3}
       propertyPath: m_Name
