@@ -27,12 +27,12 @@ namespace edia.lsl {
 			isStreaming = true;
 
 			EventManager.StartListening (eDIA.Events.DataHandlers.EvSendMarker, OnEvSendMarker);
-			EventManager.StartListening (eDIA.Events.Core.EvFinalizeSession, OnEvFinalizeSession);
+			// EventManager.StartListening (eDIA.Events..Core.EvFinalizeSession, OnEvFinalizeSession);
 		}
 
 		void OnDestroy () {
 			EventManager.StopListening (eDIA.Events.DataHandlers.EvSendMarker, OnEvSendMarker);
-			EventManager.StopListening (eDIA.Events.Core.EvFinalizeSession, OnEvFinalizeSession);
+			// EventManager.StopListening (eDIA.Events.Core.EvFinalizeSession, OnEvFinalizeSession);
 		}
 
 #endregion // -------------------------------------------------------------------------------------------------------------------------------
