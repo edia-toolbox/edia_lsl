@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.edia.core": {
-      "version": "git@gitlab.gwdg.de:3dia/edia_framework.git?path=Assets/eDIA",
+      "version": "git@gitlab.gwdg.de:3dia/edia_framework.git?path=Assets/eDIA#feat/lsl_tryout",
       "depth": 0,
       "source": "git",
       "dependencies": {
@@ -11,7 +11,7 @@
         "com.unity.render-pipelines.universal": "12.1.7",
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "5e03fd1c991bb7c10bf393204e3c1713ff13c54a"
+      "hash": "da447199be17bd2d97f4c11864b9109c66091660"
     },
     "com.labstreaminglayer.lsl4unity": {
       "version": "https://github.com/labstreaminglayer/LSL4Unity.git",

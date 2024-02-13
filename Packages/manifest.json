@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.edia.core": "git@gitlab.gwdg.de:3dia/edia_framework.git?path=Assets/eDIA",
+    "com.edia.core": "git@gitlab.gwdg.de:3dia/edia_framework.git?path=Assets/eDIA#feat/lsl_tryout",
     "com.labstreaminglayer.lsl4unity": "https://github.com/labstreaminglayer/LSL4Unity.git",
     "com.unity.ai.navigation": "1.1.5",
     "com.unity.burst": "1.8.12",
