@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 1802885849}
   - component: {fileID: 1802885848}
   m_Layer: 0
-  m_Name: Trackpad
+  m_Name: LSL_TrackpadStreamer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,11 +842,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee9c8fa6ce9bd194389c913d53431a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StreamName: Unity.TrackpadJoystick
+  StreamName: Unity.TrackpadRight
   StreamType: Unity.Vector2
   moment: 1
   IrregularRate: 0
-  Values: {x: 0, y: 0}
 --- !u!1001 &1946259651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -910,6 +909,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 36f5a35c97e6901418688172c3d4b9a5, type: 2}
+    - target: {fileID: 3668323552276314056, guid: 09feef1641974734386136a7a3486945,
+        type: 3}
+      propertyPath: Blocks.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4991154520971648174, guid: 09feef1641974734386136a7a3486945,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
