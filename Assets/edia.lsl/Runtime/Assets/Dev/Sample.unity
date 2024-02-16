@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 1802885849}
   - component: {fileID: 1802885848}
   m_Layer: 0
-  m_Name: LSL_TrackpadStreamer
+  m_Name: LSL_LeftController_RotateAnchor_Streamer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

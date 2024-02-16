@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6424060423614774398}
   - component: {fileID: 5818316916597119068}
   m_Layer: 0
-  m_Name: '[ LSL ]'
+  m_Name: '[  LSL ]'
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 82176a4c2c43d644ea1a852ed5f279cd, type: 3}
   m_NavMeshLayer: 0
