@@ -1,11 +1,13 @@
 using UnityEngine;
 using LSL4Unity.Utils;
 
-namespace LSL4Unity.Samples.Complex
-{
-    public class PoseInlet : AFloatInlet
+namespace edia.lsl {
+
+    public class PostitionRotationInlet : AFloatInlet
     {
         public Vector3 Offset = new Vector3(1.0f, 1.0f, 0.0f);
+        public bool UseOffset = false;
+
         private PoseFormat _transformFormat = PoseFormat.PosQuat7D;
         public PoseFormat TransformFormat { get { return _transformFormat; } }
 
@@ -37,7 +39,8 @@ namespace LSL4Unity.Samples.Complex
                 if (TransformFormat == PoseFormat.PosQuat7D)
                     gameObject.transform.rotation = new Quaternion(newSample[3], newSample[4], newSample[5], newSample[6]);
             }
-            gameObject.transform.position += Offset;
+            if (UseOffset) gameObject.transform.position += Offset;
         }
     }
+
 }
