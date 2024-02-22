@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "com.edia.core": "0.2.1",
-    "com.LSL.LSL4Unity": "https://github.com/labstreaminglayer/LSL4Unity.git"
+    "com.labstreaminglayer.lsl4unity": "https://github.com/labstreaminglayer/LSL4Unity.git"
   },
   "samples": [
     {
