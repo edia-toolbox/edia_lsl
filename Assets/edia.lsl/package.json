@@ -15,7 +15,8 @@
     "name": "eDIA"
   },
   "dependencies": {
-    "com.edia.core": "0.2.1"
+    "com.edia.core": "0.2.1",
+    "com.labstreaminglayer.lsl4unity": "1.16.0"
   },
   "samples": [
     {
