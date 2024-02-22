@@ -1,6 +1,6 @@
 {
   "name": "edia.lsl",
-  "displayName": "eDIA LSL package",
+  "displayName": "eDIA LSL",
   "version": "0.1.0",
   "unity": "2022.3",
   "description": "eDIA LSL functionalities for the eDIA framework",
