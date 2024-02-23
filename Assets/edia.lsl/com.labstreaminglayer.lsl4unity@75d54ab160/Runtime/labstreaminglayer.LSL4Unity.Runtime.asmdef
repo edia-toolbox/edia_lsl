@@ -1,15 +1,11 @@
 {
-    "name": "edia.lsl.editor",
+    "name": "labstreaminglayer.LSL4Unity.Runtime",
     "rootNamespace": "",
-    "references": [
-        "GUID:f707967837fcf024bbbba6dff5b33fe4"
-    ],
+    "references": [],
     "includePlatforms": [],
-    "excludePlatforms": [
-        "Editor"
-    ],
+    "excludePlatforms": [],
     "allowUnsafeCode": false,
-    "overrideReferences": false,
+    "overrideReferences": true,
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
