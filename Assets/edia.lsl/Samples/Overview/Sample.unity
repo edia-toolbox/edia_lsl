@@ -219,7 +219,7 @@ PrefabInstance:
     - target: {fileID: 742088160377399872, guid: 479bafd1e98a5d04fb2effea65f40827,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3222567531854608685, guid: 479bafd1e98a5d04fb2effea65f40827,
         type: 3}
@@ -279,7 +279,7 @@ PrefabInstance:
     - target: {fileID: 8406347875747282231, guid: 479bafd1e98a5d04fb2effea65f40827,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -686,7 +686,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 18ddb545287c546e19cc77dc9fbb2189,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -813,7 +813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98715ee36c2e2d74da70d78a9ae03f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StreamName: Unity.Event
+  StreamName: Unity.Event.ColorChange
   StreamType: Markers
   moment: 3
   IrregularRate: 1
@@ -955,6 +955,90 @@ MonoBehaviour:
   resolver: {fileID: 0}
   Offset: {x: 1, y: 1, z: 0}
   UseOffset: 1
+--- !u!1001 &1014572431
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1329082516}
+    m_Modifications:
+    - target: {fileID: 1828969341539739934, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 8000025259144739651}
+    - target: {fileID: 1828969341539739934, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: StreamName
+      value: Unity.PosRot.User.Head
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.1134546
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.26391155
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.30239296
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6889633664735717917, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: m_Name
+      value: '[ LSL Position Rotation Outlet ] (1)'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e047afcc3652d8241aa65737bd657162, type: 3}
+--- !u!4 &1014572432 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
+    type: 3}
+  m_PrefabInstance: {fileID: 1014572431}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1081904551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1093,7 +1177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1329082516}
   m_Layer: 0
-  m_Name: ------------------------------ eDIA VR
+  m_Name: ------------------------------ VR USER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1112,8 +1196,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6450594545707980389}
   - {fileID: 8706207965195346463}
+  - {fileID: 1014572432}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1511094006
@@ -1349,6 +1433,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: '[ LSL Marker Outlet ]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442463233120467391, guid: 370c594673057a44eb71c30d2ad5f3b5,
+        type: 3}
+      propertyPath: StreamName
+      value: Unity.ExampleEvents
       objectReference: {fileID: 0}
     - target: {fileID: 2676770255745807587, guid: 370c594673057a44eb71c30d2ad5f3b5,
         type: 3}
@@ -2208,7 +2297,7 @@ MonoBehaviour:
   m_TrackingStateInput:
     m_UseReference: 0
     m_Action:
-      m_Name: 
+      m_Name: Tracking State Input
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: c079b5a2-eeab-47ec-a0bc-f466271f7aee
@@ -3750,7 +3839,7 @@ Transform:
   m_GameObject: {fileID: 2533535243886164353}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14741474, y: -0.8573465, z: -2.2944696}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3759,7 +3848,7 @@ Transform:
   - {fileID: 4141873967870915921}
   - {fileID: 6232198151210619831}
   - {fileID: 5133662015527898537}
-  m_Father: {fileID: 1329082516}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &6544888023589877044
 Transform:
@@ -4233,6 +4322,7 @@ GameObject:
   - component: {fileID: 4431470748707879545}
   - component: {fileID: 2708930738841229479}
   - component: {fileID: 8331605467886036229}
+  - component: {fileID: 8331605467886036230}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -4459,6 +4549,7 @@ GameObject:
   - component: {fileID: 6059937342163323798}
   - component: {fileID: 1724542415470712815}
   - component: {fileID: 5018218708131463129}
+  - component: {fileID: 8000025259315190726}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
@@ -4700,6 +4791,24 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_ButtonPressPoint: 0.5
+--- !u!114 &8000025259315190726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000025259315190721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d87d6ca5666d8849ac7d9acced7284b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StreamName: Unity.PosRot.User.Right
+  StreamType: Unity.Transform
+  moment: 1
+  IrregularRate: 0
+  transformFormat: 1
+  Target: {fileID: 0}
 --- !u!114 &8095455350731006833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4744,6 +4853,24 @@ MonoBehaviour:
   - rot_y
   - rot_z
   updateType: 0
+--- !u!114 &8331605467886036230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000025258518354750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d87d6ca5666d8849ac7d9acced7284b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StreamName: Unity.PosRot.User.Left
+  StreamType: Unity.Transform
+  moment: 1
+  IrregularRate: 0
+  transformFormat: 1
+  Target: {fileID: 0}
 --- !u!1 &8470846539686616895
 GameObject:
   m_ObjectHideFlags: 0
@@ -4875,8 +5002,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 705507995}
-  - {fileID: 1329082516}
+  - {fileID: 6450594545707980389}
   - {fileID: 852528379}
+  - {fileID: 1329082516}
   - {fileID: 550140810}
   - {fileID: 166908331}
   - {fileID: 1899828639}
