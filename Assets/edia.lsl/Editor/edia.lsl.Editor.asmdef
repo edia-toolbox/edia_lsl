@@ -1,0 +1,18 @@
+{
+    "name": "edia.lsl.editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:0c9404ac28aef8e41a6ecd7bdb41fcb6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [
+        "Editor"
+    ],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
