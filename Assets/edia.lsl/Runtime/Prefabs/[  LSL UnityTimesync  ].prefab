@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3222567531854608685}
-  - component: {fileID: 35849546819241242}
+  - component: {fileID: 5535307455250426584}
   m_Layer: 0
   m_Name: '[  LSL UnityTimesync  ]'
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &35849546819241242
+--- !u!114 &5535307455250426584
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8406347875747282231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 873d45d18db8f14409781ddee1823d2f, type: 3}
+  m_Script: {fileID: 11500000, guid: e92fbc7e1eab6aa40a0f6648a88d39aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
