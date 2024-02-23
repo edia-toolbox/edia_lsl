@@ -961,7 +961,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1329082516}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1828969341539739934, guid: e047afcc3652d8241aa65737bd657162,
         type: 3}
@@ -976,17 +976,17 @@ PrefabInstance:
     - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1134546
+      value: -1.2608693
       objectReference: {fileID: 0}
     - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.26391155
+      value: 1.121258
       objectReference: {fileID: 0}
     - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.30239296
+      value: 2.5968626
       objectReference: {fileID: 0}
     - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
         type: 3}
@@ -1026,19 +1026,13 @@ PrefabInstance:
     - target: {fileID: 6889633664735717917, guid: e047afcc3652d8241aa65737bd657162,
         type: 3}
       propertyPath: m_Name
-      value: '[ LSL Position Rotation Outlet ] (1)'
+      value: '[ LSL Position Rotation Outlet ]'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e047afcc3652d8241aa65737bd657162, type: 3}
---- !u!4 &1014572432 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
-    type: 3}
-  m_PrefabInstance: {fileID: 1014572431}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1081904551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,9 +1189,7 @@ Transform:
   m_LocalPosition: {x: -0.14741474, y: 0.8573465, z: 2.2944696}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8706207965195346463}
-  - {fileID: 1014572432}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1511094006
@@ -4973,12 +4965,12 @@ Transform:
   m_GameObject: {fileID: 8706207965195346460}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.14741474, y: -0.8573465, z: -2.2944696}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8000025259187513186}
-  m_Father: {fileID: 1329082516}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9177812682167378845
 MonoBehaviour:
@@ -5005,6 +4997,8 @@ SceneRoots:
   - {fileID: 6450594545707980389}
   - {fileID: 852528379}
   - {fileID: 1329082516}
+  - {fileID: 8706207965195346463}
+  - {fileID: 1014572431}
   - {fileID: 550140810}
   - {fileID: 166908331}
   - {fileID: 1899828639}
