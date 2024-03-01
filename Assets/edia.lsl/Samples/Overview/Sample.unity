@@ -1852,6 +1852,11 @@ PrefabInstance:
       propertyPath: StreamName
       value: Unity.PosRot.Capsule
       objectReference: {fileID: 0}
+    - target: {fileID: 1828969341539739934, guid: e047afcc3652d8241aa65737bd657162,
+        type: 3}
+      propertyPath: UseLocalTransform
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
         type: 3}
       propertyPath: m_LocalPosition.x
