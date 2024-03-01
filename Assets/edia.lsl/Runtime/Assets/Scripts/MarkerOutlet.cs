@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using LSL4Unity.Utils;
 using LSL;
+using LSL4Unity;
 
 namespace edia.lsl {
- 
+
+    [ScriptOrder(-999)] // this needs to be executed as soon as possible in Update()
     public class MarkerOutlet : AStringOutlet
     {
 
-        private Queue<string> _triggersQueued = new();
+        private Queue<string> _markersQueued = new();
         private bool _isBuildSample = false;
 
         public enum MomentForMarker { StartOfFrame, EndOfFrame, Now }
@@ -34,11 +36,11 @@ namespace edia.lsl {
 
 
         protected override void Update() {
-            if (_triggersQueued.Count > 0) {
-                int lengthQueue = _triggersQueued.Count;
+            if (_markersQueued.Count > 0) {
+                int lengthQueue = _markersQueued.Count;
                 for (int i = 0; i < lengthQueue; i++) {
-                    sample[0] = _triggersQueued.Dequeue();
-                    pushSample();
+                    var marker = _markersQueued.Dequeue();
+                    pushMarker(marker);
                 }
             }
 
@@ -89,17 +91,11 @@ namespace edia.lsl {
         /// A delay of 0 means the marker will be sent asap in the next frame.
         /// </summary>
         /// <param name="marker">The marker to be sent.</param>
-        /// <param name="moment">The moment during the frame to send the marker. Defaults to StartOfFrame. 
-        /// Currently, delayed markers can only be sent at the start of a frame.</param>
         /// <param name="nFramesDelay">The number of frames to delay before sending the marker. 
         /// Must be non-negative. Defaults to 0, meaning marker is sent asap in the next frame.</param>
-        public void SendMarker(string marker, MomentForMarker moment = MomentForMarker.StartOfFrame, int nFramesDelay = 0) {
+        public void SendMarker(string marker, int nFramesDelay = 0) {
             if (nFramesDelay < 0) {
                 Debug.LogError("nFramesDelay must be greater than or equal to 0");
-            }
-
-            if (moment != MomentForMarker.StartOfFrame) {
-                Debug.LogError("Delayed markers can only be sent at the beginning of a frame for now.");
             }
 
             if (nFramesDelay >= 0) {
@@ -119,22 +115,23 @@ namespace edia.lsl {
 
 
         public void sendMarkerAtEndOfFrame(string marker) {
-            sample[0] = marker;
             StartCoroutine(pushMarkerAtEndOfFrame(marker));
         }
 
         
-        public void sendMarkerNextFrame(string trigger) {
-            if (_triggersQueued == null) {
-                _triggersQueued = new();
+        public void sendMarkerNextFrame(string marker) {
+            if (_markersQueued == null) {
+                _markersQueued = new();
             }
-            _triggersQueued.Enqueue(trigger);
+            _markersQueued.Enqueue(marker);
         }
 
 
         void pushMarker(string marker) {
+            var tmp = sample[0];
             sample[0] = marker;
             pushSample();
+            sample[0] = tmp;
         }
 
 
@@ -144,14 +141,14 @@ namespace edia.lsl {
         }
 
 
-        IEnumerator sendMarkerInXFrames(string trigger, int frames) {
+        IEnumerator sendMarkerInXFrames(string marker, int frames) {
             for (int i = 0; i < frames - 1; i++) {
                 yield return null;
             }
-            if (_triggersQueued == null) {
-                _triggersQueued = new();
+            if (_markersQueued == null) {
+                _markersQueued = new();
             }
-            _triggersQueued.Enqueue(trigger);
+            _markersQueued.Enqueue(marker);
         }
     }
 }
