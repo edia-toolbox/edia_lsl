@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using System;
 
 namespace edia.lsl {
-
+	[RequireComponent(typeof(TimeSync))]
 	public class ControllerVector2Outlet : AFloatOutlet {
 
 		Vector2 Values;

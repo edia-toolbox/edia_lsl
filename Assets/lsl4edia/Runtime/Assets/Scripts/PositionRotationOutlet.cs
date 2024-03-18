@@ -8,7 +8,8 @@ namespace edia.lsl {
 
     public enum PoseFormat { PosEul6D, PosQuat7D, Transform12D }
 
-    public class PositionRotationOutlet : AFloatOutlet {
+	[RequireComponent(typeof(TimeSync))]
+	public class PositionRotationOutlet : AFloatOutlet {
         public PoseFormat transformFormat = PoseFormat.PosQuat7D;
 
         [Space(20)]

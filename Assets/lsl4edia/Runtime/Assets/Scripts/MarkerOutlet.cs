@@ -8,6 +8,7 @@ using LSL4Unity;
 namespace edia.lsl {
 
     [ScriptOrder(-999)] // this needs to be executed as soon as possible in Update()
+    [RequireComponent(typeof(TimeSync))]
     public class MarkerOutlet : AStringOutlet
     {
 

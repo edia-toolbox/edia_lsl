@@ -597,6 +597,7 @@ GameObject:
   - component: {fileID: 900133044}
   - component: {fileID: 900133043}
   - component: {fileID: 900133048}
+  - component: {fileID: 900133049}
   - component: {fileID: 900133047}
   m_Layer: 0
   m_Name: '[ Dev ] Plane_Marker_Outlet'
@@ -718,6 +719,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7e316dd5de558c54190403076f6563b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &900133049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900133042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b99b6c7004b337346922978f1f379015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &977530796
