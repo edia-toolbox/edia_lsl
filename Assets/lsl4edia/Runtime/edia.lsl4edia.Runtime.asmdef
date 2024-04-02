@@ -4,14 +4,14 @@
     "references": [
         "GUID:0460cc0aa903ae648b1655e8367669bf",
         "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:3f0e79861290d264691c94c0c95fb13c"
+        "GUID:0193200a3872ab040a6c1cd09fa19067"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true, 
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
