@@ -2,7 +2,7 @@
   "dependencies": {
     "com.edia.core": "git@gitlab.gwdg.de:3dia/edia_framework.git?path=Assets/eDIA#feat/lsl_tryout",
     "com.unity.ai.navigation": "1.1.5",
-    "com.unity.burst": "1.8.12",
+    "com.unity.burst": "1.8.13",
     "com.unity.ide.visualstudio": "2.0.22",
     "com.unity.test-framework": "1.1.33",
     "com.unity.textmeshpro": "3.0.7",
