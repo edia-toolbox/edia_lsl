@@ -20,9 +20,9 @@
   },
   "samples": [
     {
-      "displayName": "Overview LSL scrips and prefabs",
-      "description": "Scene sending sphere position to LSL Outlet, cube listening to LSL inlet.",
-      "path": "Samples/Overview"
+      "displayName": "eDIA LSL demo scenes",
+      "description": "Scenes demonstrating basic LSL capabilities.",
+      "path": "Samples~/
    }
   ],
   "hideInEditor": false
