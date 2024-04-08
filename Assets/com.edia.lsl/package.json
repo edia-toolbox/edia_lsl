@@ -22,7 +22,7 @@
     {
       "displayName": "eDIA LSL demo scenes",
       "description": "Scenes demonstrating basic LSL capabilities.",
-      "path": "Samples~/
+      "path": "Samples~/"
    }
   ],
   "hideInEditor": false
