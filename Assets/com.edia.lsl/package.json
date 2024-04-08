@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "com.edia.core": "0.2.1"
+	"com.unity.inputsystem": "1.7.0",
   },
   "samples": [
     {
