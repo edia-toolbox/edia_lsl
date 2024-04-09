@@ -1,7 +1,6 @@
 # eDIA LSL demos
 
 ### 1. Minimal Example
-
 This is a reimplementation (with minor adaptations) of the `Complex Outlet Inlet Event` demo scene in the [LSL4Unity](https://github.com/labstreaminglayer/LSL4Unity) repository.  
 
 Description in the original README (slightly adapted):
@@ -16,9 +15,10 @@ This is a good starting point to check whether principally setting up LSL outlet
 
 
 ### 2. Stream Cam Pose
-
 Similar to the [Minimal Example](#1-minimal-example), just that now we are streaming out the pose (i.e., position and rotation) of the VR headset (you can use the `XR Device Simulator` GameObject in the scene to emulate a headset). The cube now reads in this stream and therefore exposes the pose of the VR headset (with a given offset along thw world's z-axis). 
 
 ### 3. Stream Controller Joystick 2D
-
 Similar to the [Stream Cam Pose](#2-stream-cam-pose) demo, but this time we are streaming the pose of each of the users hands (see the `PositionRotationOutlet` components on the `LeaftHand` and `RightHand` GameObjects) as well as the 2D information about the joystick (or touchpad) input on each of the two controllers. There is no input/inlets in this demo. 
+
+### 4. Marker Timnings
+Same setup as in the [Minimal Example](#1-minimal-example), but we demonstrate how to send markers at different (precisely specified) time points in the current frame, next frame, or with a fixed number of frames delay. This can help to synchronize the timing of the markers with the actual visual onset of stimulus events on the screen of the headset (ie., to compnesate for latency due to back buffer and scan out, etc, and to avoid jitter due to variable timings during one frame.) We recommend to use this scene or something similar to empirically (e.g., via measuring the actual stimulus onset time with a photodiode) to identify the best specifications for your setup. 
