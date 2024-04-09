@@ -1,7 +1,7 @@
 # LSL4Unity
 
 Imported from https://github.com/labstreaminglayer/LSL4Unity  
-All scripts, etc. in this folder (as well as in `../Plugins/LSL`) underlie the according license and are intellectual property of the contributors to the [LSL4Unity](https://github.com/labstreaminglayer/LSL4Unity) repository.
+All scripts, etc. in this folder (as well as in `../../Plugins/LSL`) underlie the according license and are intellectual property of the contributors to the [LSL4Unity](https://github.com/labstreaminglayer/LSL4Unity) repository.
 
 ---
 ---
