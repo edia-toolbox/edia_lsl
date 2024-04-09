@@ -1,14 +1,5 @@
 # eDIA LSL demos
 
-Imported from https://github.com/labstreaminglayer/LSL4Unity  
-All scripts, etc. in this folder (as well as in `../Plugins/LSL`) underlie the according license and are intellectual property of the contributors to the .
-
----
----
-
-
-
-
 ### 1. Minimal Example
 
 This is a reimplementation (with minor adaptations) of the `Complex Outlet Inlet Event` demo scene in the [LSL4Unity](https://github.com/labstreaminglayer/LSL4Unity) repository.  
