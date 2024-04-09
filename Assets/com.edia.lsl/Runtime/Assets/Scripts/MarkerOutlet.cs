@@ -21,7 +21,7 @@ namespace edia.lsl {
         {
             get
             {
-                List<string> chanNames = new List<string>{ "Event" };
+                var chanNames = new List<string>{ "Event" };
                 return chanNames;
             }
         }
@@ -41,7 +41,7 @@ namespace edia.lsl {
                 int lengthQueue = _markersQueued.Count;
                 for (int i = 0; i < lengthQueue; i++) {
                     var marker = _markersQueued.Dequeue();
-                    pushMarker(marker);
+                    PushMarker(marker);
                 }
             }
 
@@ -52,6 +52,7 @@ namespace edia.lsl {
 
         /// <summary>
         /// Send a marker over the configured LSL stream.
+        /// The timing of the marker will be determined by the public MomentForSampling property (not the MomentForMarker).
         /// </summary>
         /// <param name="value">String value for marker</param>
         public void SendMarker (string value) {
@@ -61,25 +62,25 @@ namespace edia.lsl {
 
 
         /// <summary>
-        /// Sends a marker immediately, at the end of the current frame, or at the start of the next frame based on the specified moment.
+        /// Sends a marker immediately, at the end of the current frame, or at the start of the next frame based on the specified momentForMarker.
         /// Note that this will behave slightly differently than SendMarker(marker) without further arguments: with arguments it will ignore 
-        /// a TimeSync component and just timestamp the marker with the current LSL time. It will also overrule the moment (MomentForSampling)
+        /// a TimeSync component and just timestamp the marker with the current LSL time. It will also overrule the momentForMarker (MomentForSampling)
         /// which may have been set in the editor.
         /// </summary>
         /// <param name="marker">The marker to be sent.</param>
-        /// <param name="moment">The moment during the frame to send the marker, 
+        /// <param name="momentForMarker">The momentForMarker during the frame to send the marker, 
         /// which can be immediately (Now), at the end of the current frame (EndOfFrame), 
-        /// or at the start of the next frame (StartOfFrame), Defaults to Now.</param>
-        public void SendMarker(string marker, MomentForMarker moment = MomentForMarker.Now) {
-            switch (moment) {
+        /// or at the start of the next frame (StartOfFrame).</param>
+        public void SendMarker(string marker, MomentForMarker momentForMarker) {
+            switch (momentForMarker) {
                 case MomentForMarker.StartOfFrame:
-                    StartCoroutine(sendMarkerInXFrames(marker, 0));
+                    StartCoroutine(SendMarkerInXFrames(marker, 0));
                     break;
                 case MomentForMarker.EndOfFrame:
-                    sendMarkerAtEndOfFrame(marker);
+                    SendMarkerAtEndOfFrame(marker);
                     break;
                 case MomentForMarker.Now:
-                    pushMarker(marker);
+                    PushMarker(marker);
                     break;
             }
         }
@@ -93,42 +94,38 @@ namespace edia.lsl {
         /// </summary>
         /// <param name="marker">The marker to be sent.</param>
         /// <param name="nFramesDelay">The number of frames to delay before sending the marker. 
-        /// Must be non-negative. Defaults to 0, meaning marker is sent asap in the next frame.</param>
-        public void SendMarker(string marker, int nFramesDelay = 0) {
+        /// Must be non-negative. 0 means the marker is sent asap in the next frame.</param>
+        public void SendMarker(string marker, int nFramesDelay) {
             if (nFramesDelay < 0) {
                 Debug.LogError("nFramesDelay must be greater than or equal to 0");
             }
-
-            if (nFramesDelay >= 0) {
-                StartCoroutine(sendMarkerInXFrames(marker, nFramesDelay));
+            else {
+                StartCoroutine(SendMarkerInXFrames(marker, nFramesDelay));
             }
         }
 
 
         protected override bool BuildSample() {
-            if (_isBuildSample) { 
-                _isBuildSample = false;
-                return true;
+            if (!_isBuildSample) {
+                return false;
             }
-
-            return false;
+            _isBuildSample = false;
+            return true;
         }
 
 
-        public void sendMarkerAtEndOfFrame(string marker) {
-            StartCoroutine(pushMarkerAtEndOfFrame(marker));
+        private void SendMarkerAtEndOfFrame(string marker) {
+            StartCoroutine(PushMarkerAtEndOfFrame(marker));
         }
 
         
-        public void sendMarkerNextFrame(string marker) {
-            if (_markersQueued == null) {
-                _markersQueued = new();
-            }
+        private void SendMarkerNextFrame(string marker) {
+            _markersQueued ??= new();
             _markersQueued.Enqueue(marker);
         }
 
 
-        void pushMarker(string marker) {
+        private void PushMarker(string marker) {
             var tmp = sample[0];
             sample[0] = marker;
             pushSample();
@@ -136,19 +133,17 @@ namespace edia.lsl {
         }
 
 
-        IEnumerator pushMarkerAtEndOfFrame(string marker) {
+        private IEnumerator PushMarkerAtEndOfFrame(string marker) {
             yield return new WaitForEndOfFrame();
-            pushMarker(marker);
+            PushMarker(marker);
         }
 
 
-        IEnumerator sendMarkerInXFrames(string marker, int frames) {
+        private IEnumerator SendMarkerInXFrames(string marker, int frames) {
             for (int i = 0; i < frames - 1; i++) {
                 yield return null;
             }
-            if (_markersQueued == null) {
-                _markersQueued = new();
-            }
+            _markersQueued ??= new();
             _markersQueued.Enqueue(marker);
         }
     }

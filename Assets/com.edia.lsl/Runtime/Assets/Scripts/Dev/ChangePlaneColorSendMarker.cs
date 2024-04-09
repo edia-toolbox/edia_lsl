@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace edia.lsl {
 
-	public class ChangePlaneColour : MonoBehaviour {
+	public class ChangePlaneColourSendMarker : MonoBehaviour {
 		private Material mat;
 
 		protected void Start() {
@@ -20,6 +20,7 @@ namespace edia.lsl {
 
 				mat.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
 
+				// Will send the marker at the moment specified under MomentForSampling (on the MarkerOutlet component) in the editor 
 				GetComponent<MarkerOutlet>().SendMarker(mat.color.ToString());
 			}
 		}
