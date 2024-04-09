@@ -1,5 +1,13 @@
 # LSL4Unity
 
+Imported from https://github.com/labstreaminglayer/LSL4Unity  
+All scripts, etc. in this folder (as well as in `../Plugins/LSL`) underlie the according license and are intellectual property of the contributors to the [LSL4Unity](https://github.com/labstreaminglayer/LSL4Unity) repository.
+
+---
+---
+
+# [LSL4Unity](https://github.com/labstreaminglayer/LSL4Unity) README
+
 LSL4Unity was originally created by @xfleckx several years ago. That version has been [archived](https://github.com/labstreaminglayer/LSL4Unity/releases/tag/archive).
 
 LSL4Unity is reborn as a [Unity Custom Package](https://docs.unity3d.com/Manual/CustomPackages.html).
