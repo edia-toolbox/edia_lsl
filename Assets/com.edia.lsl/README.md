@@ -23,7 +23,9 @@ There are different ways to achieve this. We recommend to always use Unity's `Pa
 Check out the demo scenes in [Assets/Samples](Assets/Samples) (or [Assets/com.edia.lsl/Samples~](Assets/com.edia.lsl/Samples~)) and read the according [README](Assets/com.edia.lsl/Samples~).
 
 ## Useful resources
+0. [LSL Documentation](https://labstreaminglayer.readthedocs.io/index.html)
 1. [LSL4Unity repository](https://github.com/labstreaminglayer/LSL4Unity)
 2. [C# interface to LabStreamingLayer](https://github.com/labstreaminglayer/liblsl-Csharp)
 3. [LSL Slack channel](https://labstreaminglayer.slack.com/)
-
+4. [BrainVision LSL Viewer](https://pressrelease.brainproducts.com/lsl-viewer/): Useful tool (with some limitations) to quickly visualize LSL streams. 
+5. [LSL LabRecorder](https://github.com/labstreaminglayer/App-LabRecorder): Useful tool (with some learning curve) to record LSL streams to disk. 
