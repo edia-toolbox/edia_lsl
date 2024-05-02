@@ -6,7 +6,7 @@ using LSL4Unity.Utils;
 using UnityEngine.InputSystem;
 using System;
 
-namespace edia.lsl {
+namespace Edia.Lsl {
 	[RequireComponent(typeof(TimeSync))]
 	public class ControllerVector2Outlet : AFloatOutlet {
 

@@ -1,7 +1,7 @@
 using UnityEngine;
 using LSL4Unity.Utils;
 
-namespace edia.lsl {
+namespace Edia.Lsl {
 
     public class PostitionRotationInlet : AFloatInlet
     {

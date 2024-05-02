@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace edia.lsl {
+namespace Edia.Lsl {
 
 	public class SendTimedMarkers : MonoBehaviour {
 		private Material mat;

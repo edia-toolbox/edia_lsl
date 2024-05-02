@@ -4,7 +4,7 @@ using UnityEngine;
 using LSL;
 using LSL4Unity.Utils;
 
-namespace edia.lsl {
+namespace Edia.Lsl {
 
     public enum PoseFormat { PosEul6D, PosQuat7D, Transform12D }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace edia.lsl {
+namespace Edia.Lsl {
 
 	public class ChangePlaneColourSendMarker : MonoBehaviour {
 		private Material mat;

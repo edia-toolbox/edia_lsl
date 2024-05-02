@@ -5,7 +5,7 @@ using LSL4Unity.Utils;
 using LSL;
 using LSL4Unity;
 
-namespace edia.lsl {
+namespace Edia.Lsl {
 
     [ScriptOrder(-999)] // this needs to be executed as soon as possible in Update()
     [RequireComponent(typeof(TimeSync))]

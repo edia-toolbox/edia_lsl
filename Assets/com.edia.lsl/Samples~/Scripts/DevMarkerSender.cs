@@ -1,4 +1,4 @@
-using edia.lsl;
+using Edia.Lsl;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +9,6 @@ public class DevMarkerSender : MonoBehaviour
 
 	private void Start() {
 		StartCoroutine(MarkerSender());
-
 	}
 	
 
