@@ -1,18 +1,18 @@
 {
   "name": "com.edia.lsl",
-  "displayName": "eDIA LSL",
-  "version": "0.1.0",
+  "displayName": "EDIA LSL",
+  "version": "0.2.0",
   "unity": "2022.3",
-  "description": "eDIA LSL functionalities for the eDIA framework",
+  "description": "EDIA: LSL functionalities",
   "keywords": [
-    "eDIA",
+    "EDIA",
     "xr",
     "vr",
     "experiment",
     "LSL"
   ],
   "author": {
-    "name": "eDIA"
+    "name": "EDIA"
   },
   "dependencies": {
     "com.edia.core": "0.2.1",
@@ -20,7 +20,7 @@
   },
   "samples": [
     {
-      "displayName": "eDIA LSL demo scenes",
+      "displayName": "EDIA LSL demo scenes",
       "description": "Scenes demonstrating basic LSL capabilities.",
       "path": "Samples~/"
    }

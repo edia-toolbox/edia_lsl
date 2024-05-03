@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.edia.core": {
-      "version": "git@gitlab.gwdg.de:3dia/edia_framework.git?path=Assets/eDIA",
+      "version": "git@gitlab.gwdg.de:3dia/edia_core.git?path=Assets/com.edia.core#feat/fadetoblack",
       "depth": 0,
       "source": "git",
       "dependencies": {
@@ -12,7 +12,7 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1",
         "com.unity.textmeshpro": "3.0.8"
       },
-      "hash": "518bd80f215013c070886caeeb1023c2083d579a"
+      "hash": "af715b54739644346219f560c6afec567aad7803"
     },
     "com.unity.ai.navigation": {
       "version": "1.1.5",
