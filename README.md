@@ -1,4 +1,4 @@
-# eDIA LSL
+# EDIA LSL
 
 This is a wrapper around the [LSL4Unity](https://github.com/labstreaminglayer/LSL4Unity) repository.  
 We provide some additional functionalities (e.g., more advanced or specific sending of event markers) and useful implementations of concepts common to many experiments.
