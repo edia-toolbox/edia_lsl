@@ -33,13 +33,12 @@ namespace Edia.Lsl {
             }
         }
 
-        public bool PushSample(float posX, float posY, float posZ, float pitch, float yaw, float roll, float pupilDiameter = 0f, float confidence = 0f, double lslTimestamp = 0) {
+        public bool PushSample(float posX, float posY, float posZ, float yaw, float pitch, float pupilDiameter = 0f, float confidence = 0f, double lslTimestamp = 0) {
             sample[0] = posX;
             sample[1] = posY;
             sample[2] = posZ;
-            sample[3] = pitch;
-            sample[4] = yaw;
-            sample[5] = roll;
+            sample[3] = yaw;
+            sample[4] = pitch;
             sample[6] = pupilDiameter;
             sample[7] = confidence;
 
