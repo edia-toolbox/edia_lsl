@@ -9,7 +9,7 @@ using UnityEditor.PackageManager.UI;
 
 namespace Edia.Lsl {
 
-	public class EyeOutlet : MonoBehaviour, ILslPusher, ILslTimer {
+	public class EyeOutlet : MonoBehaviour, ILslPusher {
 
         [field: Space(20)]
         [Tooltip("Which eye is this streaming.")]
