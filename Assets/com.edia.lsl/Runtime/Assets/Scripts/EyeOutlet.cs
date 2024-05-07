@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Edia;
 using LSL;
 using LSL4Unity.Utils;
 using System.Xml.Linq;
@@ -10,24 +11,22 @@ namespace Edia.Lsl {
 
     public enum EyeId { Left, Right, Center }
 
-	public class EyeOutlet : MonoBehaviour {
+	public class EyeOutlet : MonoBehaviour, ILslPusher {
 
         [Space(20)]
         [Tooltip("Which eye is this streaming.")]
-        [Header("Which eye is this streaming.")]
+        [Header("Which eye?")]
         public EyeId EyeId;
 
-
-
-        public string StreamName;
-        public string StreamType;
+        public string StreamName = "EDIA.Eye";
+        public string StreamType = "Eye.Data";
         public bool IrregularRate = false;
         public int SamplingRate;
         private bool UniqueFromInstanceId = true;
 
         private List<string> _channelNames {
             get {
-                var chanNames = new List<string>() { "PosX", "PosY", "PosZ", "Pitch", "Yaw", "Roll", "PupilDiameter", "PupilDiameterX", "PupilDiameterY", "Confidence" };
+                var chanNames = new List<string>() { "PosX", "PosY", "PosZ", "Pitch", "Yaw", "Roll", "PupilDiameter", "Confidence", "TimestampET" };
                 return chanNames;
             }
         }
@@ -50,6 +49,8 @@ namespace Edia.Lsl {
         private void Start() {
             _sample = new float[_channelCount];
 
+            StreamName += $".{EyeId}";
+
             var hash = new Hash128();
             hash.Append(StreamName);
             hash.Append(StreamType);
@@ -71,7 +72,7 @@ namespace Edia.Lsl {
         private void Awake() {
         }
 
-        public bool PushSample(float posX, float posY, float posZ,
+        public void PushSample(float posX, float posY, float posZ,
                                float rotX, float rotY, float rotZ,
                                float pupilDiameter = 0f,
                                float confidence = 0f,
@@ -88,7 +89,6 @@ namespace Edia.Lsl {
             _sample[8] = timestampEt;
 
             pushSample(timestampLsl);
-            return true;
         }
 
 
