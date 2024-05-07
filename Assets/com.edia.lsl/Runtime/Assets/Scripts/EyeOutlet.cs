@@ -15,7 +15,13 @@ namespace Edia.Lsl {
         [Tooltip("Which eye is this streaming.")]
         [field: Header("Which eye?")]
         [SerializeField]
-        public Constants.EyeId EyeId { get; set; } = Constants.EyeId.CENTER;
+        private Constants.EyeId _eyeId = Constants.EyeId.CENTER;
+        public Constants.EyeId EyeId { 
+            get => _eyeId;
+            set {
+                _eyeId = value; 
+            } 
+        }
 
         public string StreamName = "EDIA.Eye";
         public string StreamType = "Eye.Data";
