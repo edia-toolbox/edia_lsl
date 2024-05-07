@@ -8,14 +8,14 @@ using UnityEditor.PackageManager.UI;
 
 namespace Edia.Lsl {
 
-    public enum EyeIdLsl { Left, Right, Center }
+    public enum EyeId { Left, Right, Center }
 
 	public class EyeOutlet : MonoBehaviour {
 
         [Space(20)]
         [Tooltip("Which eye is this streaming.")]
         [Header("Which eye is this streaming.")]
-        public EyeIdLsl EyeIdLsl;
+        public EyeId EyeId;
 
 
 
@@ -84,8 +84,8 @@ namespace Edia.Lsl {
             _sample[4] = rotY;
             _sample[5] = rotZ;
             _sample[6] = pupilDiameter;
-            _sample[9] = confidence;
-            _sample[10] = timestampEt;
+            _sample[7] = confidence;
+            _sample[8] = timestampEt;
 
             pushSample(timestampLsl);
             return true;
