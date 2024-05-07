@@ -9,14 +9,12 @@ using UnityEditor.PackageManager.UI;
 
 namespace Edia.Lsl {
 
-    public enum EyeId { Left, Right, Center }
+	public class EyeOutlet : MonoBehaviour, ILslPusher, ILslTimer {
 
-	public class EyeOutlet : MonoBehaviour, ILslPusher {
-
-        [Space(20)]
+        [field: Space(20)]
         [Tooltip("Which eye is this streaming.")]
-        [Header("Which eye?")]
-        public EyeId EyeId;
+        [field: Header("Which eye?")]
+        public Constants.EyeId EyeId { get; set; }
 
         public string StreamName = "EDIA.Eye";
         public string StreamType = "Eye.Data";
@@ -67,6 +65,10 @@ namespace Edia.Lsl {
             FillChannelsHeader(channels);
 
             _outlet = new StreamOutlet(streamInfo);
+        }
+
+        public double GetTime() {
+            return LSL.LSL.local_clock();
         }
 
         private void Awake() {
