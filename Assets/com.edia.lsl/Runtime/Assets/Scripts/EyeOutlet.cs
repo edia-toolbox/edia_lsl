@@ -5,7 +5,6 @@ using Edia;
 using LSL;
 using LSL4Unity.Utils;
 using System.Xml.Linq;
-using UnityEditor.PackageManager.UI;
 
 namespace Edia.Lsl {
 
