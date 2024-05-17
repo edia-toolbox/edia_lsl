@@ -21,7 +21,7 @@ namespace LSL4Unity.Utils
         protected TData[] sample;
         // A singleton of a TimeSync object can ensure that all pushes that happen on the same moment (update/fixed/late etc)
         // on the same frame will have the same timestamp.
-        private TimeSync timeSync;
+        protected TimeSync timeSync;
 
         // Add an XML element for each channel. The automatic version adds only channel labels. Override to add unit, location, etc.
         protected virtual void FillChannelsHeader(XMLElement channels)
