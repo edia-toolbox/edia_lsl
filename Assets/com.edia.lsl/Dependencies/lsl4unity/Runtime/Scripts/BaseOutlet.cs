@@ -56,7 +56,7 @@ namespace LSL4Unity.Utils
             acq_el.append_child_value("manufacturer", "LSL4Unity");
             XMLElement channels = streamInfo.desc().append_child("channels");
             FillChannelsHeader(channels);
-            
+
             outlet = new StreamOutlet(streamInfo);
         }
 

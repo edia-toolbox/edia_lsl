@@ -8,34 +8,62 @@ using System.Xml.Linq;
 using System;
 
 namespace Edia.Lsl {
-
     public enum PoseFormatEdia { PosEul6D, PosQuat7D }
 
 	[RequireComponent(typeof(TimeSync))]
 	public class EdiaPositionRotationOutlet : AFloatOutlet {
+        /// <summary>
+        /// A LSL outlet which streams position and rotation data. 
+        /// 
+        /// Based on the `PositionRotationOutlet.cs` from the LSL4Unity GitHub repository ([c:] 2021; Markus Fleck; https://github.com/labstreaminglayer/LSL4Unity), 
+        /// extended for usage within the EDIA framework (Felix Klotzsche, 2024).
+        /// </summary>
+        
         public PoseFormatEdia transformFormat = PoseFormatEdia.PosQuat7D;
 
         [Space(20)]
         [Tooltip("E.g. 90 for the HTC Vive")]
         [Header("Refresh rate of the Headset/display (in Hz)")]
-        public float DisplayRefreshRate = 90; // TODO: implement more user friendly
+        public float DisplayRefreshRate = 90; // TODO: This could be more user friendly
 
         [Space(20)]
         [Tooltip("Leave empty to use current gameobject")]
-        [Header("Leave empty to use current gameobject")]
-        public Transform Target = null;
+        [Header("Tracked object (default: current GameObject) and Origin of tracking space.")]
+        public Transform TrackedObject = null;
 
-        public bool UseLocalSpace = false;  //TODO: make more robust
+        public bool UseLocalSpace = false;
+        [Tooltip("Only used, when using Local Space. Leave empty to use parent of the current gameObject.")]
+        public Transform Origin;
 
         private void Awake() {
-            Target = Target == null ? gameObject.transform : Target;
+            TrackedObject = TrackedObject == null ? gameObject.transform : TrackedObject;
+
+            if (UseLocalSpace) {
+                if (Origin == null) {
+                    if (TrackedObject.transform.parent != null) {
+                        Origin = TrackedObject.transform.parent;
+                    } else {
+                        Debug.LogWarning($"You specified to use LocalSpace but did not provide an Origin nor does the tracked GameObject ({TrackedObject.name}) have a parent. Setting up an empty at the World Origin.");
+                        GameObject worldOrigin = new(name: "WorldOrigin");
+                        worldOrigin.transform.position = Vector3.zero;
+                        worldOrigin.transform.rotation = Quaternion.identity;
+                        Origin = worldOrigin.transform;
+                    }
+                }
+                string locStr = UseLocalSpace ? $".LocalTo{Origin.name}" : "";
+                StreamName = StreamName + locStr;
+            }
+            else {
+                if (Origin != null) {
+                    Debug.LogWarning("You specified an Origin but did not indicate to use Local Space; ignoring the origin and using World Space.");
+                }
+            }
         }
 
         public void Reset() {
-            string locStr = UseLocalSpace ? ".local" : "";
-            StreamName = $"Unity.PosRot{locStr}";
+            StreamName = "Unity.PosRot";
             StreamType = "Unity.Transform";
-            moment = MomentForSampling.FixedUpdate;
+            moment = MomentForSampling.EndOfFrame;
         }
 
         public override List<string> ChannelNames {
@@ -71,7 +99,7 @@ namespace Edia.Lsl {
 
             // Build XML header. See xdf wiki for recommendations: https://github.com/sccn/xdf/wiki/Meta-Data
             XMLElement acq_el = streamInfo.desc().append_child("acquisition");
-            acq_el.append_child_value("manufacturer", "LSL4Unity");
+            acq_el.append_child_value("manufacturer", "EDIA");
             XMLElement channels = streamInfo.desc().append_child("channels");
             FillChannelsHeader(channels);
 
@@ -98,20 +126,21 @@ namespace Edia.Lsl {
         }
 
         protected override bool BuildSample() {
-            var position = UseLocalSpace ? Target.localPosition : Target.position;
+
+            
+            var position = UseLocalSpace ? Origin.InverseTransformPoint(TrackedObject.position) : TrackedObject.position;
+            var rotation = UseLocalSpace ? Quaternion.Inverse(Origin.rotation) * TrackedObject.rotation : TrackedObject.rotation;
 
             sample[0] = position.x;
             sample[1] = position.y;
             sample[2] = position.z;
 
             if (transformFormat == PoseFormatEdia.PosEul6D) {
-                var rotation = UseLocalSpace ? Target.localRotation.eulerAngles : Target.eulerAngles;
-                sample[3] = rotation.x;
-                sample[4] = rotation.y;
-                sample[5] = rotation.z;
+                sample[3] = rotation.eulerAngles.x;
+                sample[4] = rotation.eulerAngles.y;
+                sample[5] = rotation.eulerAngles.z;
             }
             else {
-                var rotation = UseLocalSpace ? Target.localRotation : Target.rotation;
                 sample[3] = rotation.x;
                 sample[4] = rotation.y;
                 sample[5] = rotation.z;
