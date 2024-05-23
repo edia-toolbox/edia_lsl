@@ -10,6 +10,8 @@ namespace Edia.Lsl {
 
 	public class EyeOutlet : MonoBehaviour, ILslPusher {
 
+        public enum EyeTrackingSamplingRate {ViveProEye_120Hz, QuestPro_72Hz, QuestPro_90Hz, VarjoAero_100Hz, VarjoAero_200Hz, IDoNotKnow}
+
         [field: Space(20)]
         [Tooltip("Which eye is this streaming.")]
         [field: Header("Which eye?")]
@@ -25,7 +27,8 @@ namespace Edia.Lsl {
         public string StreamName = "EDIA.Eye";
         public string StreamType = "Eye.Data";
         public bool IrregularRate = false;
-        public int SamplingRate;
+        [Tooltip("How fast does your eye tracker provide samples?")]
+        public EyeTrackingSamplingRate ExpectedSamplingRate = EyeTrackingSamplingRate.ViveProEye_120Hz;
         private bool UniqueFromInstanceId = true;
 
         private List<string> _channelNames {
@@ -61,7 +64,38 @@ namespace Edia.Lsl {
             if (UniqueFromInstanceId)
                 hash.Append(gameObject.GetInstanceID());
 
-            double dataRate = IrregularRate ? LSL.LSL.IRREGULAR_RATE : SamplingRate;
+            double samplingRate = 0;
+            if (!IrregularRate) {
+                switch (ExpectedSamplingRate) {
+                    case EyeTrackingSamplingRate.ViveProEye_120Hz:
+                        samplingRate = 120;
+                        break;
+                    case EyeTrackingSamplingRate.QuestPro_72Hz:
+                        samplingRate = 72;
+                        break;
+                    case EyeTrackingSamplingRate.QuestPro_90Hz:
+                        samplingRate = 90;
+                        break;
+                    case EyeTrackingSamplingRate.VarjoAero_100Hz:
+                        samplingRate = 100;
+                        break;
+                    case EyeTrackingSamplingRate.VarjoAero_200Hz:
+                        samplingRate = 200;
+                        break;
+                    case EyeTrackingSamplingRate.IDoNotKnow:
+                        IrregularRate = true;
+                        samplingRate = 0;
+                        Debug.Log("You did not specify an eye tracking sampling rate; setting this to an irregular stream.");
+                        break;
+                    default:
+                        IrregularRate = true;
+                        samplingRate = 0;
+                        Debug.Log("No appropriate sampling rate set; setting this to an irregular stream.");
+                        break;
+                }
+            }
+
+            double dataRate = IrregularRate ? LSL.LSL.IRREGULAR_RATE : samplingRate;
             StreamInfo streamInfo = new StreamInfo(StreamName, StreamType, _channelCount, dataRate, Format, hash.ToString());
 
             // Build XML header. See xdf wiki for recommendations: https://github.com/sccn/xdf/wiki/Meta-Data

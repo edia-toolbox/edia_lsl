@@ -15,7 +15,7 @@ namespace Edia.Lsl {
         private Queue<string> _markersQueued = new();
         private bool _isBuildSample = false;
 
-        public enum MomentForMarker { StartOfFrame, EndOfFrame, Now }
+        public enum CustomMomentForMarker { StartOfNextFrame, EndOfThisFrame, Now }
 
 		public override List<string> ChannelNames
         {
@@ -52,7 +52,7 @@ namespace Edia.Lsl {
 
         /// <summary>
         /// Send a marker over the configured LSL stream.
-        /// The timing of the marker will be determined by the public MomentForSampling property (not the MomentForMarker).
+        /// The timing of the marker will be determined by the public MomentForSampling property (not the CustomMomentForMarker).
         /// </summary>
         /// <param name="value">String value for marker</param>
         public void SendMarker (string value) {
@@ -62,24 +62,24 @@ namespace Edia.Lsl {
 
 
         /// <summary>
-        /// Sends a marker immediately, at the end of the current frame, or at the start of the next frame based on the specified momentForMarker.
+        /// Sends a marker immediately, at the end of the current frame, or at the start of the next frame based on the specified customMomentForMarker.
         /// Note that this will behave slightly differently than SendMarker(marker) without further arguments: with arguments it will ignore 
-        /// a TimeSync component and just timestamp the marker with the current LSL time. It will also overrule the momentForMarker (MomentForSampling)
+        /// a TimeSync component and just timestamp the marker with the current LSL time. It will also overrule the customMomentForMarker (MomentForSampling)
         /// which may have been set in the editor.
         /// </summary>
         /// <param name="marker">The marker to be sent.</param>
-        /// <param name="momentForMarker">The momentForMarker during the frame to send the marker, 
-        /// which can be immediately (Now), at the end of the current frame (EndOfFrame), 
-        /// or at the start of the next frame (StartOfFrame).</param>
-        public void SendMarker(string marker, MomentForMarker momentForMarker) {
-            switch (momentForMarker) {
-                case MomentForMarker.StartOfFrame:
+        /// <param name="customMomentForMarker">The customMomentForMarker to send the marker, 
+        /// which can be immediately (Now), at the end of the current frame (EndOfThisFrame), 
+        /// or at the start of the next frame (StartOfNextFrame).</param>
+        public void SendMarker(string marker, CustomMomentForMarker customMomentForMarker) {
+            switch (customMomentForMarker) {
+                case CustomMomentForMarker.StartOfNextFrame:
                     StartCoroutine(SendMarkerInXFrames(marker, 0));
                     break;
-                case MomentForMarker.EndOfFrame:
+                case CustomMomentForMarker.EndOfThisFrame:
                     SendMarkerAtEndOfFrame(marker);
                     break;
-                case MomentForMarker.Now:
+                case CustomMomentForMarker.Now:
                     PushMarker(marker);
                     break;
             }
