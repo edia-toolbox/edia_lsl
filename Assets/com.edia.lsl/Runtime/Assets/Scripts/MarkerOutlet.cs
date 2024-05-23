@@ -15,7 +15,7 @@ namespace Edia.Lsl {
         private Queue<string> _markersQueued = new();
         private bool _isBuildSample = false;
 
-        public enum MomentForMarker { StartOfFrame, EndOfFrame, Now }
+        public enum MomentForMarker { StartOfNextFrame, EndOfThisFrame, Now }
 
 		public override List<string> ChannelNames
         {
@@ -69,14 +69,14 @@ namespace Edia.Lsl {
         /// </summary>
         /// <param name="marker">The marker to be sent.</param>
         /// <param name="momentForMarker">The momentForMarker during the frame to send the marker, 
-        /// which can be immediately (Now), at the end of the current frame (EndOfFrame), 
-        /// or at the start of the next frame (StartOfFrame).</param>
+        /// which can be immediately (Now), at the end of the current frame (EndOfThisFrame), 
+        /// or at the start of the next frame (StartOfNextFrame).</param>
         public void SendMarker(string marker, MomentForMarker momentForMarker) {
             switch (momentForMarker) {
-                case MomentForMarker.StartOfFrame:
+                case MomentForMarker.StartOfNextFrame:
                     StartCoroutine(SendMarkerInXFrames(marker, 0));
                     break;
-                case MomentForMarker.EndOfFrame:
+                case MomentForMarker.EndOfThisFrame:
                     SendMarkerAtEndOfFrame(marker);
                     break;
                 case MomentForMarker.Now:
