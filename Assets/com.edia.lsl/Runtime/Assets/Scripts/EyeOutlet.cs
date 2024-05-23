@@ -27,6 +27,7 @@ namespace Edia.Lsl {
         public string StreamName = "EDIA.Eye";
         public string StreamType = "Eye.Data";
         public bool IrregularRate = false;
+        [Tooltip("How fast does your eye tracker provide samples?")]
         public EyeTrackingSamplingRate ExpectedSamplingRate = EyeTrackingSamplingRate.ViveProEye_120Hz;
         private bool UniqueFromInstanceId = true;
 
