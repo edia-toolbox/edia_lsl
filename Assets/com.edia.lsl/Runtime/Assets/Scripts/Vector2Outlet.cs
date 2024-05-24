@@ -10,6 +10,7 @@ namespace Edia.Lsl {
 	public class Vector2Outlet : AFloatOutlet {
 
 		Vector2 currentValues;
+		bool isUpdated = false;
 
 		public void Reset() {
 			StreamName = "Unity.Vector2";
@@ -30,14 +31,19 @@ namespace Edia.Lsl {
 		/// Call this method to supply the stream with new values.
 		/// </summary>
 		/// <param name="newValues">Update vector2 data</param>
-		public void SetNewVector2DValues(Vector2 newValues) {
+		public void UpdateValues(Vector2 newValues) {
 			currentValues = newValues;
+			isUpdated = true;
 		}
 
 		protected override bool BuildSample() {
-			sample[0] = currentValues.x;
-			sample[1] = currentValues.y;
-			return true;
+			if (isUpdated) {
+				sample[0] = currentValues.x;
+				sample[1] = currentValues.y;
+				isUpdated = false; // reset flag
+				return true;
+			}
+            else return false;
 		}
 	}
 }
