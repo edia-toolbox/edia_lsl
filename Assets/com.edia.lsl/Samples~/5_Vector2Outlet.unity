@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.95686275}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -606,8 +606,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8960ae95f8b8060419689f6841146fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetString: RectTransform.anchoredPosition
   targetObject: {fileID: 1737860172}
+  PathToParameter: RectTransform.anchoredPosition
+  OnVector2InputValueChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1279886102}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: UpdateValues
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1279886102 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3893984016963920658, guid: 0194d582585ceca4dbac76e1f5c56462,
+    type: 3}
+  m_PrefabInstance: {fileID: 1279886099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279886100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8b8f555ef3ce0418beefd6c45986a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1734001353
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bd158a231e781458a8f77d1fbd4e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentPosition: {x: 0, y: 0}
+  currentPosition: {x: 0, y: 0}
   NewPosition: {x: 0, y: 0}
   UpdateInterval: 2
 --- !u!1 &1835152677
