@@ -1,44 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 using LSL;
 using LSL4Unity.Utils;
-using System.Xml.Linq;
-using System;
 
 namespace Edia.Lsl {
-    public enum PoseFormatEdia { PosEul6D, PosQuat7D }
 
+    public enum PoseFormatEdia { PosEul6D, PosQuat7D }
+    public enum TrackingSpaces { WorldSpace, LocalSpace }
+
+    /// <summary>
+    /// A LSL outlet which streams position and rotation data at custom rate (HZ). 
+    /// 
+    /// Based on the `PositionRotationOutlet.cs` from the LSL4Unity GitHub repository ([c:] 2021; Markus Fleck; https://github.com/labstreaminglayer/LSL4Unity), 
+    /// extended for usage within the EDIA framework (Felix Klotzsche, 2024).
+    /// </summary>
 	[RequireComponent(typeof(TimeSync))]
 	public class EdiaPositionRotationOutlet : AFloatOutlet {
-        /// <summary>
-        /// A LSL outlet which streams position and rotation data. 
-        /// 
-        /// Based on the `PositionRotationOutlet.cs` from the LSL4Unity GitHub repository ([c:] 2021; Markus Fleck; https://github.com/labstreaminglayer/LSL4Unity), 
-        /// extended for usage within the EDIA framework (Felix Klotzsche, 2024).
-        /// </summary>
         
         public PoseFormatEdia transformFormat = PoseFormatEdia.PosQuat7D;
 
         [Space(20)]
-        [Tooltip("E.g. 90 for the HTC Vive")]
-        [Header("Refresh rate of the Headset/display (in Hz)")]
-        public float DisplayRefreshRate = 90; // TODO: This could be more user friendly
+        [Tooltip("Set required data rate for this stream.")]
+        [Header("Custom data rate (in Hz)")]
+        [Range(1f, 200f)] // Assumption 200 is enough
+        public int ConfiguredDataRate = 90; // INT as that works better for a slider
 
         [Space(20)]
         [Tooltip("Leave empty to use current gameobject")]
-        [Header("Tracked object (default: current GameObject) and Origin of tracking space.")]
+        [Header("Tracked object (none = current GameObject)")]
         public Transform TrackedObject = null;
 
-        public bool UseLocalSpace = false;
-        [Tooltip("Only used, when using Local Space. Leave empty to use parent of the current gameObject.")]
+		[Space(10)]
+		[Header("Tracking space and local origin (none = current parent)")]
+        public TrackingSpaces TrackingSpace = TrackingSpaces.WorldSpace;
+        [Tooltip("Only used with Local Space. Leave none to use local parent.")]
         public Transform Origin;
 
         private void Awake() {
             TrackedObject = TrackedObject == null ? gameObject.transform : TrackedObject;
 
-            if (UseLocalSpace) {
+            if (TrackingSpace == TrackingSpaces.LocalSpace) {
                 if (Origin == null) {
                     if (TrackedObject.transform.parent != null) {
                         Origin = TrackedObject.transform.parent;
@@ -50,7 +52,7 @@ namespace Edia.Lsl {
                         Origin = worldOrigin.transform;
                     }
                 }
-                string locStr = UseLocalSpace ? $".LocalTo{Origin.name}" : "";
+                string locStr = TrackingSpace == TrackingSpaces.LocalSpace ? $".LocalTo{Origin.name}" : "";
                 StreamName = StreamName + locStr;
             }
             else {
@@ -115,7 +117,7 @@ namespace Edia.Lsl {
 
             if (moment == MomentForSampling.Update || moment == MomentForSampling.LateUpdate || moment == MomentForSampling.EndOfFrame) {
 
-                samplingRateInHertz = DisplayRefreshRate;
+                samplingRateInHertz = ConfiguredDataRate;
             }
             return samplingRateInHertz;
         }
@@ -126,10 +128,9 @@ namespace Edia.Lsl {
         }
 
         protected override bool BuildSample() {
-
             
-            var position = UseLocalSpace ? Origin.InverseTransformPoint(TrackedObject.position) : TrackedObject.position;
-            var rotation = UseLocalSpace ? Quaternion.Inverse(Origin.rotation) * TrackedObject.rotation : TrackedObject.rotation;
+            var position = TrackingSpace == TrackingSpaces.LocalSpace ? Origin.InverseTransformPoint(TrackedObject.position) : TrackedObject.position;
+            var rotation = TrackingSpace == TrackingSpaces.LocalSpace ? Quaternion.Inverse(Origin.rotation) * TrackedObject.rotation : TrackedObject.rotation;
 
             sample[0] = position.x;
             sample[1] = position.y;

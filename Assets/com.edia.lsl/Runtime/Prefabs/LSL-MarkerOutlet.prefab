@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6889633664735717917
+--- !u!1 &2427984057286231448
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,56 +8,54 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3965615715967240933}
-  - component: {fileID: 1828969341539739934}
-  - component: {fileID: 1006960380966281017}
+  - component: {fileID: 2676770255745807587}
+  - component: {fileID: 2442463233120467391}
+  - component: {fileID: 7463051895604214386}
   m_Layer: 0
-  m_Name: '[ LSL Position Rotation Outlet ]'
+  m_Name: LSL-MarkerOutlet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3965615715967240933
+--- !u!4 &2676770255745807587
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6889633664735717917}
+  m_GameObject: {fileID: 2427984057286231448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2608693, y: 1.121258, z: 2.5968626}
+  m_LocalPosition: {x: -0.5331847, y: 0.578857, z: 1.6037067}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1828969341539739934
+--- !u!114 &2442463233120467391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6889633664735717917}
+  m_GameObject: {fileID: 2427984057286231448}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d87d6ca5666d8849ac7d9acced7284b, type: 3}
+  m_Script: {fileID: 11500000, guid: 98715ee36c2e2d74da70d78a9ae03f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StreamName: Unity.PosRot
-  StreamType: Unity.Transform
-  moment: 1
-  IrregularRate: 0
-  transformFormat: 1
-  Target: {fileID: 0}
---- !u!114 &1006960380966281017
+  StreamName: Unity.TestEvents
+  StreamType: Markers
+  moment: 3
+  IrregularRate: 1
+--- !u!114 &7463051895604214386
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6889633664735717917}
+  m_GameObject: {fileID: 2427984057286231448}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fd6e101497b228478472b9af1a56fd9, type: 3}
