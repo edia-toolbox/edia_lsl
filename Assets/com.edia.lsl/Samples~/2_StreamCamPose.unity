@@ -123,6 +123,94 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &84771793
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1828969341539739934, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 2006241966}
+    - target: {fileID: 1828969341539739934, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: StreamName
+      value: Unity.PosRot.User.Head
+      objectReference: {fileID: 0}
+    - target: {fileID: 1828969341539739934, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: TrackedObject
+      value: 
+      objectReference: {fileID: 2006241966}
+    - target: {fileID: 1828969341539739934, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: ConfiguredDataRate
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3965615715967240933, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6889633664735717917, guid: ae2305e7732eff54a91ebc83b2783651,
+        type: 3}
+      propertyPath: m_Name
+      value: LSL-Extended-PositionRotationOutlet
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ae2305e7732eff54a91ebc83b2783651, type: 3}
 --- !u!1 &209027951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,84 +2022,6 @@ MonoBehaviour:
   resolver: {fileID: 0}
   Offset: {x: 0, y: 0, z: 1}
   UseOffset: 1
---- !u!1001 &1014572431
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1828969341539739934, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: Target
-      value: 
-      objectReference: {fileID: 2006241966}
-    - target: {fileID: 1828969341539739934, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: StreamName
-      value: Unity.PosRot.User.Head
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.2608693
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.121258
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.5968626
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3965615715967240933, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6889633664735717917, guid: e047afcc3652d8241aa65737bd657162,
-        type: 3}
-      propertyPath: m_Name
-      value: '[ LSL Position Rotation Outlet ]'
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e047afcc3652d8241aa65737bd657162, type: 3}
 --- !u!1 &1329082515
 GameObject:
   m_ObjectHideFlags: 0
@@ -2427,7 +2437,7 @@ SceneRoots:
   - {fileID: 1329082516}
   - {fileID: 1429993612}
   - {fileID: 1473927628}
-  - {fileID: 1014572431}
+  - {fileID: 84771793}
   - {fileID: 1899828639}
   - {fileID: 977530801}
   - {fileID: 1511094007}

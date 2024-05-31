@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4699591410554114670}
   - component: {fileID: 2223946270990284986}
   m_Layer: 0
-  m_Name: '[  LSL XRController Vector2 Outlet ]'
+  m_Name: LSL-XRController-Vector2Outlet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

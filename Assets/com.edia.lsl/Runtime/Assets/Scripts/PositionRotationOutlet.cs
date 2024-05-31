@@ -8,13 +8,16 @@ namespace Edia.Lsl {
 
     public enum PoseFormat { PosEul6D, PosQuat7D, Transform12D }
 
+	/// <summary>
+	/// A LSL outlet which streams position and rotation data. 
+	/// Based on the `PositionRotationOutlet.cs` from the LSL4Unity GitHub repository ([c:] 2021; Markus Fleck; https://github.com/labstreaminglayer/LSL4Unity), 
+	/// </summary>
 	[RequireComponent(typeof(TimeSync))]
 	public class PositionRotationOutlet : AFloatOutlet {
         public PoseFormat transformFormat = PoseFormat.PosQuat7D;
 
         [Space(20)]
-        [Tooltip("Leave empty to use current gameobject")]
-        [Header("Leave empty to use current gameobject")]
+        [Header("none = current gameobject")]
         public Transform Target = null;
 
         private void Awake() {
