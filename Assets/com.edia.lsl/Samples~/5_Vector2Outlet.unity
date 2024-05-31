@@ -608,7 +608,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetObject: {fileID: 1737860172}
   PathToParameter: RectTransform.anchoredPosition
-  OnVector2InputValueChanged:
+  OnFloatUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnVector2Update:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1279886102}
@@ -623,6 +626,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnVector3Update:
+    m_PersistentCalls:
+      m_Calls: []
+  OnIntUpdate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1279886102 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3893984016963920658, guid: 0194d582585ceca4dbac76e1f5c56462,

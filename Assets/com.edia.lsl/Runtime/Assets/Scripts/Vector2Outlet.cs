@@ -6,11 +6,17 @@ using LSL4Unity.Utils;
 using System;
 
 namespace Edia.Lsl {
+
 	[RequireComponent(typeof(TimeSync))]
 	public class Vector2Outlet : AFloatOutlet {
 
+		public enum EmptyPackageValues { Zero, LastValue }
+		[Space(20)]
+		[Header("What to send when no new vector2 values are recieved.")]
+		public EmptyPackageValues OnNoUpdateUse = EmptyPackageValues.Zero;
+
 		Vector2 currentValues;
-		bool isUpdated = false;
+		Vector2 oldValues;
 
 		public void Reset() {
 			StreamName = "Unity.Vector2";
@@ -30,20 +36,16 @@ namespace Edia.Lsl {
 		/// <summary>
 		/// Call this method to supply the stream with new values.
 		/// </summary>
-		/// <param name="newValues">Update vector2 data</param>
+		/// <param name="newValues">new vector2 values</param>
 		public void UpdateValues(Vector2 newValues) {
+			oldValues = currentValues;
 			currentValues = newValues;
-			isUpdated = true;
 		}
 
 		protected override bool BuildSample() {
-			if (isUpdated) {
-				sample[0] = currentValues.x;
-				sample[1] = currentValues.y;
-				isUpdated = false; // reset flag
-				return true;
-			}
-            else return false;
+			sample[0] = currentValues.x != oldValues.x ? currentValues.x : OnNoUpdateUse == EmptyPackageValues.LastValue ? currentValues.x : 0f;
+			sample[1] = currentValues.y != oldValues.y ? currentValues.y : OnNoUpdateUse == EmptyPackageValues.LastValue ? currentValues.y : 0f;
+			return true;
 		}
 	}
 }

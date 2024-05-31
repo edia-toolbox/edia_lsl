@@ -2,77 +2,88 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class LinkObjectParameter : MonoBehaviour {
+namespace Edia.Lsl {
 
-	[Header("Object from which we grab a parameter")]
-	public UnityEngine.Object targetObject;
-	[Space(20)]
-	[Header("TargetObjects parameter to grab. I.e. RectTransform.anchoredPosition\nValid are: Int, Float, Vector2, Vector3")]
-	public string PathToParameter = string.Empty;
+	/// <summary>
+	/// This script grabs the parameter value of a component of the given targetobject on each update. \nAnd passes it along in a event hook configurable by the user.
+	/// </summary>
+	public class LinkObjectParameter : MonoBehaviour {
+		// TODO Find better name for this script
 
-	[Serializable] public class Input2DValueChanged : UnityEvent<Vector2> { } // event definition to fire
+		[Header("Target")]
+		[Tooltip("The target object from which to grab the parameter")]
+		public UnityEngine.Object targetObject;
+		[Space(20)]
 
-	[Header("Methods to fire when value changes")]
-	public Input2DValueChanged OnVector2InputValueChanged; // event link in inspector
+		[Header("Referencing the parameter as a string. \nThis is the search path on the gameobject.\n\nExample: RectTransform.AnchoredPosition -> Vector2 parameter")]
+		[Tooltip("Case sensitive. Expects script API namings.")]
+		public string PathToParameter = string.Empty;
 
-	Type targetType = null;
-	string[] path;
+		[Header("Method hooks")]
+		public UnityEvent<float> OnFloatUpdate = new();
+		public UnityEvent<Vector2> OnVector2Update = new();
+		public UnityEvent<Vector3> OnVector3Update = new();
+		public UnityEvent<int> OnIntUpdate = new();
 
-	private void Start() {
-		targetType = targetObject.GetType();
-		path = PathToParameter.Split('.');
-	}
+		Type targetType = null;
+		Type currentType = null;
+		string[] path;
+		object currentObject;
 
-	void Update() {
-		if (targetObject != null && !string.IsNullOrEmpty(PathToParameter)) {
+		private void Start() {
+			targetType = targetObject.GetType();
+			path = PathToParameter.Split('.');
+		}
 
-			object currentObject = targetObject;
-			Type currentType = targetType;
+		void Update() {
+			if (targetObject != null && !string.IsNullOrEmpty(PathToParameter)) {
 
-			foreach (var part in path) {
-				if (currentObject is GameObject gameObject) {
-					// Check if the part is a component name
-					currentObject = gameObject.GetComponent(part);
-					if (currentObject != null) {
-						currentType = currentObject.GetType();
-						continue;
+				currentObject = targetObject;
+				currentType = targetType;
+
+				foreach (var part in path) {
+					if (currentObject is GameObject gameObject) {
+						// Check if the part is a component name
+						currentObject = gameObject.GetComponent(part);
+						if (currentObject != null) {
+							currentType = currentObject.GetType();
+							continue;
+						}
 					}
-				}
 
-				var property = currentType.GetProperty(part);
-				if (property != null) {
-					currentObject = property.GetValue(currentObject);
-					currentType = property.PropertyType;
-				}
-				else {
-					var field = currentType.GetField(part);
-					if (field != null) {
-						currentObject = field.GetValue(currentObject);
-						currentType = field.FieldType;
+					var property = currentType.GetProperty(part);
+					if (property != null) {
+						currentObject = property.GetValue(currentObject);
+						currentType = property.PropertyType;
 					}
 					else {
-						Debug.LogError($"Property or Field '{part}' not found on '{currentType.Name}'");
-						return;
+						var field = currentType.GetField(part);
+						if (field != null) {
+							currentObject = field.GetValue(currentObject);
+							currentType = field.FieldType;
+						}
+						else {
+							Debug.LogError($"Property or Field '{part}' not found on '{currentType.Name}'");
+							return;
+						}
 					}
 				}
-			}
 
-			// Now currentObject should hold the final value
-			if (currentObject is float floatValue) {
-				Debug.Log($"Linked Value: {floatValue}");
+				// Now currentObject should hold the final value
+				if (currentObject is float floatValue) {
+					OnFloatUpdate.Invoke(floatValue);
+				}
+				else if (currentObject is Vector2 vector2Value) {
+					//Debug.Log(vector2Value);
+					OnVector2Update.Invoke(vector2Value);
+				}
+				else if (currentObject is Vector3 vector3Value) {
+					OnVector3Update.Invoke(vector3Value);
+				}
+				else if (currentObject is int intValue) {
+					OnIntUpdate.Invoke(intValue);
+				}
 			}
-			else if (currentObject is Vector2 vector2Value) {
-				Debug.Log($"Linked Value: {vector2Value}");
-				OnVector2InputValueChanged.Invoke(vector2Value);
-			}
-			else if (currentObject is Vector3 vector3Value) {
-				Debug.Log($"Linked Value: {vector3Value}");
-			}
-			else if (currentObject is int intValue) {
-				Debug.Log($"Linked Value: {intValue}");
-			}
-
-			// Add more cases as needed for other types
 		}
 	}
 }
