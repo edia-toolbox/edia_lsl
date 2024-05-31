@@ -13,7 +13,7 @@ namespace Edia.Lsl {
 	/// Based on the `PositionRotationOutlet.cs` from the LSL4Unity GitHub repository ([c:] 2021; Markus Fleck; https://github.com/labstreaminglayer/LSL4Unity), 
 	/// </summary>
 	[RequireComponent(typeof(TimeSync))]
-	public class PositionRotationOutlet : AFloatOutlet {
+	public class PosRotDefaultOutlet : AFloatOutlet {
         public PoseFormat transformFormat = PoseFormat.PosQuat7D;
 
         [Space(20)]

@@ -8,7 +8,7 @@ using System;
 
 namespace Edia.Lsl {
 	[RequireComponent(typeof(TimeSync))]
-	public class ControllerVector2Outlet : AFloatOutlet {
+	public class XRControllerVector2Outlet : AFloatOutlet {
 
 		Vector2 Values;
 

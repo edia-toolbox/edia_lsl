@@ -3,7 +3,7 @@ using LSL4Unity.Utils;
 
 namespace Edia.Lsl {
 
-    public class PostitionRotationInlet : AFloatInlet
+    public class PosRotInlet : AFloatInlet
     {
         public Vector3 Offset = new Vector3(1.0f, 1.0f, 0.0f);
         public bool UseOffset = false;
