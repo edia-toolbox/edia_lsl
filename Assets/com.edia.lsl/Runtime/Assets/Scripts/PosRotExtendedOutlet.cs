@@ -16,7 +16,7 @@ namespace Edia.Lsl {
     /// extended for usage within the EDIA framework (Felix Klotzsche, 2024).
     /// </summary>
 	[RequireComponent(typeof(TimeSync))]
-	public class EdiaPositionRotationOutlet : AFloatOutlet {
+	public class PosRotExtendedOutlet : AFloatOutlet {
         
         public PoseFormatEdia transformFormat = PoseFormatEdia.PosQuat7D;
 

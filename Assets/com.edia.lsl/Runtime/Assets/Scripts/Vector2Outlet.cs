@@ -15,8 +15,11 @@ namespace Edia.Lsl {
 		[Header("What to send when no new vector2 values are recieved.")]
 		public EmptyPackageValues OnNoUpdateUse = EmptyPackageValues.Zero;
 
-		Vector2 currentValues;
-		Vector2 oldValues;
+		[Header("Flag that determines if the script is allowed to push new values onto the stream. Default TRUE")]
+		public bool IsAllowed = true;
+
+		Vector2 currentValues = new();
+		Vector2 oldValues = new();
 
 		public void Reset() {
 			StreamName = "Unity.Vector2";
@@ -42,10 +45,20 @@ namespace Edia.Lsl {
 			currentValues = newValues;
 		}
 
+		public void SetAllowedTo(bool onOff) {
+			IsAllowed = onOff;
+		}
+
 		protected override bool BuildSample() {
-			sample[0] = currentValues.x != oldValues.x ? currentValues.x : OnNoUpdateUse == EmptyPackageValues.LastValue ? currentValues.x : 0f;
-			sample[1] = currentValues.y != oldValues.y ? currentValues.y : OnNoUpdateUse == EmptyPackageValues.LastValue ? currentValues.y : 0f;
-			return true;
+			if (!IsAllowed) {
+				sample[0] = OnNoUpdateUse == EmptyPackageValues.LastValue ? currentValues.x : 0f;
+				sample[1] = OnNoUpdateUse == EmptyPackageValues.LastValue ? currentValues.y : 0f;
+				return true;
+			} else {
+				sample[0] = currentValues.x != oldValues.x ? currentValues.x : OnNoUpdateUse == EmptyPackageValues.LastValue ? currentValues.x : 0f;
+				sample[1] = currentValues.y != oldValues.y ? currentValues.y : OnNoUpdateUse == EmptyPackageValues.LastValue ? currentValues.y : 0f;
+				return true;
+			}
 		}
 	}
 }
