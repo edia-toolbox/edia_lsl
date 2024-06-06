@@ -21,10 +21,10 @@ namespace Edia.Lsl {
         public PoseFormatEdia transformFormat = PoseFormatEdia.PosQuat7D;
 
         [Space(20)]
-        [Tooltip("Set required data rate for this stream.")]
-        [Header("Custom data rate (in Hz)")]
+        [Tooltip("Assumed data rate, default = 90 (Unity VR).")]
+        [Header("Assumed data rate (in Hz) from source")]
         [Range(1f, 200f)] // Assumption 200 is enough
-        public int ConfiguredDataRate = 90; // INT as that works better for a slider
+        public int AssumedDataRate = 90; // INT as that works better for a slider
 
         [Space(20)]
         [Tooltip("Leave empty to use current gameobject")]
@@ -117,7 +117,7 @@ namespace Edia.Lsl {
 
             if (moment == MomentForSampling.Update || moment == MomentForSampling.LateUpdate || moment == MomentForSampling.EndOfFrame) {
 
-                samplingRateInHertz = ConfiguredDataRate;
+                samplingRateInHertz = AssumedDataRate;
             }
             return samplingRateInHertz;
         }
