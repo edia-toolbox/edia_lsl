@@ -29,21 +29,32 @@ namespace Edia.Lsl {
         public bool IrregularRate = false;
         [Tooltip("How fast does your eye tracker provide samples?")]
         public EyeTrackingSamplingRate ExpectedSamplingRate = EyeTrackingSamplingRate.ViveProEye_120Hz;
-        private bool UniqueFromInstanceId = true;
-
-        private List<string> _channelNames {
-            get {
-                var chanNames = new List<string>() { "PosX", "PosY", "PosZ", "Pitch", "Yaw", "Roll", "PupilDiameter", "Confidence", "TimestampET" };
-                return chanNames;
-            }
-        }
         public int _channelCount { get { return _channelNames.Count; } }
+
+        [Tooltip("Save rotation of eyeball in Euler Angles or Quaternions?")]
+        public PoseFormatEdia EyePoseFormat = PoseFormatEdia.PosQuat7D;
 
         // We'region only sending floats for now
         public channel_format_t Format { get { return channel_format_t.cf_float32; } }
 
         private StreamOutlet _outlet;
         private float[] _sample;
+        private bool UniqueFromInstanceId = true;
+
+        private List<string> _channelNames {
+            get {
+                var chanNames = new List<string>();
+                if (EyePoseFormat == PoseFormatEdia.PosEul6D) {
+                    chanNames = new List<string>() { "PosX", "PosY", "PosZ", "Pitch", "Yaw", "Roll", "PupilDiameter", "Confidence", "TimestampET" };
+                } else if (EyePoseFormat == PoseFormatEdia.PosQuat7D) {
+                    chanNames = new List<string>() { "PosX", "PosY", "PosZ", "RotW", "RotX", "RotY", "RotZ", "PupilDiameter", "Confidence", "TimestampET" };
+                } else {
+                    Debug.LogError("Unknown PoseFormat for EyePose.");
+                }
+                return chanNames;
+            }
+        }
+
 
         // Add an XML element for each channel. The automatic version adds only channel labels. Override to add unit, location, etc.
         private void FillChannelsHeader(XMLElement channels) {
@@ -120,6 +131,19 @@ namespace Edia.Lsl {
                                float confidence = 0f,
                                float timestampEt = 0f,
                                double timestampLsl = 0) {
+            ///<summary>
+            /// Builds and pushes a sample with eye tracking data.
+            /// </summary>
+            /// <param name="posX">The x-coordinate of the local eye position.</param>
+            /// <param name="posY">The y-coordinate of the local eye position.</param>
+            /// <param name="posZ">The z-coordinate of the local eye position.</param>
+            /// <param name="rotX">The x-component of the local eye rotation in euler Angles.</param>
+            /// <param name="rotY">The y-component of the local eye rotation in euler Angles.</param>
+            /// <param name="rotZ">The z-component of the local eye rotation in euler Angles.</param>
+            /// <param name="pupilDiameter">The diameter of the pupil. Default is 0f.</param>
+            /// <param name="confidence">The confidence level of the eye tracking data. Default is 0f.</param>
+            /// <param name="timestampEt">The eye tracker timestamp. Default is 0f.</param>
+            /// <param name="timestampLsl">The LSL timestamp. Default is 0 and will timestamp the sample on sending.</param>
             _sample[0] = posX;
             _sample[1] = posY;
             _sample[2] = posZ;
@@ -132,6 +156,42 @@ namespace Edia.Lsl {
 
             pushSample(timestampLsl);
         }
+
+        public void PushSample(float posX, float posY, float posZ,
+                               float rotW, float rotX, float rotY, float rotZ,
+                               float pupilDiameter = 0f,
+                               float confidence = 0f,
+                               float timestampEt = 0f,
+                               double timestampLsl = 0) {
+            ///<summary>
+            /// Builds and pushes a sample with eye tracking data.
+            /// </summary>
+            /// <param name="posX">The x-coordinate of the local eye position.</param>
+            /// <param name="posY">The y-coordinate of the local eye position.</param>
+            /// <param name="posZ">The z-coordinate of the local eye position.</param>
+            /// <param name="rotW">The w-component of the local eye rotation in quaternions.</param>
+            /// <param name="rotX">The x-component of the local eye rotation in quaternions.</param>
+            /// <param name="rotY">The y-component of the local eye rotation in quaternions.</param>
+            /// <param name="rotZ">The z-component of the local eye rotation in quaternions.</param>
+            /// <param name="pupilDiameter">The diameter of the pupil. Default is 0f.</param>
+            /// <param name="confidence">The confidence level of the eye tracking data. Default is 0f.</param>
+            /// <param name="timestampEt">The eye tracker timestamp. Default is 0f.</param>
+            /// <param name="timestampLsl">The LSL timestamp. Default is 0 and will timestamp the sample on sending.</param>
+            _sample[0] = posX;
+            _sample[1] = posY;
+            _sample[2] = posZ;
+            _sample[3] = rotW;
+            _sample[4] = rotX;
+            _sample[5] = rotY;
+            _sample[6] = rotZ;
+            _sample[7] = pupilDiameter;
+            _sample[8] = confidence;
+            _sample[9] = timestampEt;
+
+            pushSample(timestampLsl);
+        }
+
+
 
 
         private void pushSample(double timestamp = 0) {
