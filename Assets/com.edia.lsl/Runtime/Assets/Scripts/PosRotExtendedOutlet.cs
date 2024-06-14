@@ -6,9 +6,6 @@ using LSL4Unity.Utils;
 
 namespace Edia.Lsl {
 
-    public enum PoseFormatEdia { PosEul6D, PosQuat7D }
-    public enum TrackingSpaces { WorldSpace, LocalSpace }
-
     /// <summary>
     /// A LSL outlet which streams position and rotation data at custom rate (HZ). 
     /// 
