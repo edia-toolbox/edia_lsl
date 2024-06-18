@@ -14,8 +14,8 @@ namespace Edia.Lsl {
     /// </summary>
 	[RequireComponent(typeof(TimeSync))]
 	public class PosRotExtendedOutlet : AFloatOutlet {
-        
-        public PoseFormat transformFormat = PoseFormat.PosQuat7D;
+
+        public RotationFormat rotationFormat = RotationFormat.Quaternion;
 
         [Space(20)]
         [Tooltip("Assumed data rate, default = 90 (Unity VR).")]
@@ -70,10 +70,10 @@ namespace Edia.Lsl {
                 List<string> chanNames = new List<string>();
                 chanNames.AddRange(new string[] { "PosX", "PosY", "PosZ" }); // sequence xyz is very important
 
-                if (transformFormat == PoseFormat.PosEul6D) {
+                if (rotationFormat == RotationFormat.EulerAngles) {
                     chanNames.AddRange(new string[] { "Pitch", "Yaw", "Roll" }); // sequence -- pitch: x-rot, yaw:y-rot, roll:z-rot!
                 }
-                else if (transformFormat == PoseFormat.PosQuat7D) {
+                else if (rotationFormat == RotationFormat.Quaternion) {
                     chanNames.AddRange(new string[] { "RotX", "RotY", "RotZ", "RotW" }); // sequence xyzw is very important
                 }
 
@@ -120,7 +120,7 @@ namespace Edia.Lsl {
 
 
         protected override void ExtendHash(Hash128 hash) {
-            hash.Append(transformFormat.ToString());
+            hash.Append(rotationFormat.ToString());
         }
 
         protected override bool BuildSample() {
@@ -133,13 +133,13 @@ namespace Edia.Lsl {
             sample[1] = position.y;
             sample[2] = position.z;
 
-            if (transformFormat == PoseFormat.PosEul6D) {
+            if (rotationFormat == RotationFormat.EulerAngles) {
                 // sequence xyz is very important
                 sample[3] = rotation.eulerAngles.x;
                 sample[4] = rotation.eulerAngles.y;
                 sample[5] = rotation.eulerAngles.z;
             }
-            else if (transformFormat == PoseFormat.PosQuat7D) {
+            else if (rotationFormat == RotationFormat.Quaternion) {
                 // sequence xyzw is very important
                 sample[3] = rotation.x;
                 sample[4] = rotation.y;
