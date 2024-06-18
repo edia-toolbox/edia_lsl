@@ -1,27 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Edia;
 using LSL;
-using LSL4Unity.Utils;
-using System.Xml.Linq;
 
 namespace Edia.Lsl {
 
-	public class EyeOutlet : MonoBehaviour, ILslPusher {
+    public class EyeOutlet : MonoBehaviour, ILslEyeOutlet {
 
-        public enum EyeTrackingSamplingRate {ViveProEye_120Hz, QuestPro_72Hz, QuestPro_90Hz, VarjoAero_100Hz, VarjoAero_200Hz, IDoNotKnow}
+        public enum EyeTrackingSamplingRate { ViveProEye_120Hz, QuestPro_72Hz, QuestPro_90Hz, VarjoAero_100Hz, VarjoAero_200Hz, IDoNotKnow }
 
         [field: Space(20)]
         [Tooltip("Which eye is this streaming.")]
         [field: Header("Which eye?")]
         [SerializeField]
-        private Constants.EyeId _eyeId = Constants.EyeId.CENTER;
-        public Constants.EyeId EyeId { 
+        private Edia.Constants.EyeId _eyeId = Constants.EyeId.CENTER;
+        public Edia.Constants.EyeId EyeId {
             get => _eyeId;
             set {
-                _eyeId = value; 
-            } 
+                _eyeId = value;
+            }
         }
 
         public string StreamName = "EDIA.Eye";
@@ -31,8 +27,8 @@ namespace Edia.Lsl {
         public EyeTrackingSamplingRate ExpectedSamplingRate = EyeTrackingSamplingRate.ViveProEye_120Hz;
         public int _channelCount { get { return _channelNames.Count; } }
 
-        [Tooltip("Save rotation of eyeball in Euler Angles or Quaternions?")]
-        public PoseFormat EyePoseFormat = PoseFormat.PosQuat7D;
+        [Tooltip("Save rotation of eyeball in EulerAngles Angles or Quaternions?")]
+        public RotationFormat EyeRotationFormat = RotationFormat.EulerAngles;
 
         // We'region only sending floats for now
         public channel_format_t Format { get { return channel_format_t.cf_float32; } }
@@ -44,12 +40,12 @@ namespace Edia.Lsl {
         private List<string> _channelNames {
             get {
                 var chanNames = new List<string>();
-                if (EyePoseFormat == PoseFormat.PosEul6D) {
+                if (EyeRotationFormat == RotationFormat.EulerAngles) {
                     chanNames = new List<string>() { "PosX", "PosY", "PosZ", "Pitch", "Yaw", "Roll", "PupilDiameter", "Confidence", "TimestampET" };
-                } else if (EyePoseFormat == PoseFormat.PosQuat7D) {
+                } else if (EyeRotationFormat == RotationFormat.Quaternion) {
                     chanNames = new List<string>() { "PosX", "PosY", "PosZ", "RotW", "RotX", "RotY", "RotZ", "PupilDiameter", "Confidence", "TimestampET" };
                 } else {
-                    Debug.LogError("Unknown PoseFormat for EyePose.");
+                    Debug.LogError("Unknown RotationFormat for EyePose.");
                 }
                 return chanNames;
             }
@@ -118,80 +114,81 @@ namespace Edia.Lsl {
             _outlet = new StreamOutlet(streamInfo);
         }
 
-        public double GetTime() {
+        public double GetLslTime() {
             return LSL.LSL.local_clock();
         }
 
         private void Awake() {
         }
 
-        public void PushSample(float posX, float posY, float posZ,
-                               float rotX, float rotY, float rotZ,
-                               float pupilDiameter = 0f,
-                               float confidence = 0f,
-                               float timestampEt = 0f,
-                               double timestampLsl = 0) {
-            ///<summary>
-            /// Builds and pushes a sample with eye tracking data.
-            /// </summary>
-            /// <param name="posX">The x-coordinate of the local eye position.</param>
-            /// <param name="posY">The y-coordinate of the local eye position.</param>
-            /// <param name="posZ">The z-coordinate of the local eye position.</param>
-            /// <param name="rotX">The x-component of the local eye rotation in euler Angles.</param>
-            /// <param name="rotY">The y-component of the local eye rotation in euler Angles.</param>
-            /// <param name="rotZ">The z-component of the local eye rotation in euler Angles.</param>
-            /// <param name="pupilDiameter">The diameter of the pupil. Default is 0f.</param>
-            /// <param name="confidence">The confidence level of the eye tracking data. Default is 0f.</param>
-            /// <param name="timestampEt">The eye tracker timestamp. Default is 0f.</param>
-            /// <param name="timestampLsl">The LSL timestamp. Default is 0 and will timestamp the sample on sending.</param>
-            _sample[0] = posX;
-            _sample[1] = posY;
-            _sample[2] = posZ;
-            _sample[3] = rotX;
-            _sample[4] = rotY;
-            _sample[5] = rotZ;
-            _sample[6] = pupilDiameter;
-            _sample[7] = confidence;
-            _sample[8] = timestampEt;
 
-            pushSample(timestampLsl);
-        }
+        ///<summary>
+        /// Builds and pushes a sample with eye tracking data.
+        /// </summary>
+        /// <param name="eyePositionLocal">The local eye position.</param>
+        /// <param name="eyeRotationLocalEuler">The local eye rotation in Euler Angles.</param>
+        /// <param name="pupilDiameter">The diameter of the pupil. Default is 0f.</param>
+        /// <param name="confidence">The confidence level of the eye tracking data. Default is 0f.</param>
+        /// <param name="timestampEt">The eye tracker timestamp. Default is 0f.</param>
+        /// <param name="timestampLsl">The LSL timestamp. Default is 0 and will timestamp the sample on sending.</param>
+        public void PushSample(Vector3 eyePositionLocal, Vector3 eyeRotationLocalEuler, float pupilDiameter = 0f,
+                               float confidence = 0f, float timestampEt = 0f, double timestampLsl = 0) {
 
-        public void PushSample(float posX, float posY, float posZ,
-                               float rotW, float rotX, float rotY, float rotZ,
-                               float pupilDiameter = 0f,
-                               float confidence = 0f,
-                               float timestampEt = 0f,
-                               double timestampLsl = 0) {
-            ///<summary>
-            /// Builds and pushes a sample with eye tracking data.
-            /// </summary>
-            /// <param name="posX">The x-coordinate of the local eye position.</param>
-            /// <param name="posY">The y-coordinate of the local eye position.</param>
-            /// <param name="posZ">The z-coordinate of the local eye position.</param>
-            /// <param name="rotW">The w-component of the local eye rotation in quaternions.</param>
-            /// <param name="rotX">The x-component of the local eye rotation in quaternions.</param>
-            /// <param name="rotY">The y-component of the local eye rotation in quaternions.</param>
-            /// <param name="rotZ">The z-component of the local eye rotation in quaternions.</param>
-            /// <param name="pupilDiameter">The diameter of the pupil. Default is 0f.</param>
-            /// <param name="confidence">The confidence level of the eye tracking data. Default is 0f.</param>
-            /// <param name="timestampEt">The eye tracker timestamp. Default is 0f.</param>
-            /// <param name="timestampLsl">The LSL timestamp. Default is 0 and will timestamp the sample on sending.</param>
-            _sample[0] = posX;
-            _sample[1] = posY;
-            _sample[2] = posZ;
-            _sample[3] = rotW;
-            _sample[4] = rotX;
-            _sample[5] = rotY;
-            _sample[6] = rotZ;
-            _sample[7] = pupilDiameter;
-            _sample[8] = confidence;
-            _sample[9] = timestampEt;
+            if (EyeRotationFormat == RotationFormat.EulerAngles) {
 
-            pushSample(timestampLsl);
+                _sample[0] = eyePositionLocal.x;
+                _sample[1] = eyePositionLocal.y;
+                _sample[2] = eyePositionLocal.z;
+                _sample[3] = eyeRotationLocalEuler.x;
+                _sample[4] = eyeRotationLocalEuler.y;
+                _sample[5] = eyeRotationLocalEuler.z;
+                _sample[6] = pupilDiameter;
+                _sample[7] = confidence;
+                _sample[8] = timestampEt;
+
+                pushSample(timestampLsl);
+
+            } else if (EyeRotationFormat != RotationFormat.Quaternion) {
+
+                Quaternion rotAsQuaternion = Quaternion.Euler(eyeRotationLocalEuler.x, eyeRotationLocalEuler.y, eyeRotationLocalEuler.z);
+
+                PushSample(eyePositionLocal, rotAsQuaternion, pupilDiameter, confidence, timestampEt, timestampLsl);
+            }
         }
 
 
+        ///<summary>
+        /// Builds and pushes a sample with eye tracking data.
+        /// </summary>
+        /// <param name="eyePositionLocal">The local eye position.</param>
+        /// <param name="eyeRotationLocalQuaternion">The local eye rotation as Quaternion.</param>
+        /// <param name="pupilDiameter">The diameter of the pupil. Default is 0f.</param>
+        /// <param name="confidence">The confidence level of the eye tracking data. Default is 0f.</param>
+        /// <param name="timestampEt">The eye tracker timestamp. Default is 0f.</param>
+        /// <param name="timestampLsl">The LSL timestamp. Default is 0 and will timestamp the sample on sending.</param>
+        public void PushSample(Vector3 eyePositionLocal, Quaternion eyeRotationLocalQuaternion, float pupilDiameter = 0f,
+                               float confidence = 0f, float timestampEt = 0f, double timestampLsl = 0) {
+
+            if (EyeRotationFormat == RotationFormat.Quaternion) {
+                _sample[0] = eyePositionLocal.x;
+                _sample[1] = eyePositionLocal.y;
+                _sample[2] = eyePositionLocal.z;
+                _sample[3] = eyeRotationLocalQuaternion.w; // watch out for wxyz sequence — see header!
+                _sample[4] = eyeRotationLocalQuaternion.x;
+                _sample[5] = eyeRotationLocalQuaternion.y;
+                _sample[6] = eyeRotationLocalQuaternion.z;
+                _sample[7] = pupilDiameter;
+                _sample[8] = confidence;
+                _sample[9] = timestampEt;
+
+                pushSample(timestampLsl);
+            } else if (EyeRotationFormat == RotationFormat.EulerAngles) {
+
+                Vector3 rotAsEuler = eyeRotationLocalQuaternion.eulerAngles;
+
+                PushSample(eyePositionLocal, rotAsEuler, pupilDiameter, confidence, timestampEt, timestampLsl);
+            }
+        }
 
 
         private void pushSample(double timestamp = 0) {
