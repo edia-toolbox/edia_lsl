@@ -15,7 +15,7 @@ namespace Edia.Lsl {
 	[RequireComponent(typeof(TimeSync))]
 	public class PosRotExtendedOutlet : AFloatOutlet {
         
-        public PoseFormatEdia transformFormat = PoseFormatEdia.PosQuat7D;
+        public PoseFormat transformFormat = PoseFormat.PosQuat7D;
 
         [Space(20)]
         [Tooltip("Assumed data rate, default = 90 (Unity VR).")]
@@ -30,14 +30,14 @@ namespace Edia.Lsl {
 
 		[Space(10)]
 		[Header("Tracking space and local origin (none = current parent)")]
-        public TrackingSpaces TrackingSpace = TrackingSpaces.WorldSpace;
+        public TrackingSpace TrackingSpace = TrackingSpace.WorldSpace;
         [Tooltip("Only used with Local Space. Leave none to use local parent.")]
         public Transform Origin;
 
         private void Awake() {
             TrackedObject = TrackedObject == null ? gameObject.transform : TrackedObject;
 
-            if (TrackingSpace == TrackingSpaces.LocalSpace) {
+            if (TrackingSpace == TrackingSpace.LocalSpace) {
                 if (Origin == null) {
                     if (TrackedObject.transform.parent != null) {
                         Origin = TrackedObject.transform.parent;
@@ -49,7 +49,7 @@ namespace Edia.Lsl {
                         Origin = worldOrigin.transform;
                     }
                 }
-                string locStr = TrackingSpace == TrackingSpaces.LocalSpace ? $".LocalTo{Origin.name}" : "";
+                string locStr = TrackingSpace == TrackingSpace.LocalSpace ? $".LocalTo{Origin.name}" : "";
                 StreamName = StreamName + locStr;
             }
             else {
@@ -68,10 +68,10 @@ namespace Edia.Lsl {
         public override List<string> ChannelNames {
             get {
                 List<string> chanNames = new List<string>();
-                if ((transformFormat == PoseFormatEdia.PosEul6D) || (transformFormat == PoseFormatEdia.PosQuat7D)) {
+                if ((transformFormat == PoseFormat.PosEul6D) || (transformFormat == PoseFormat.PosQuat7D)) {
                     chanNames.AddRange(new string[] { "PosX", "PosY", "PosZ" });
 
-                    if (transformFormat == PoseFormatEdia.PosEul6D) {
+                    if (transformFormat == PoseFormat.PosEul6D) {
                         chanNames.AddRange(new string[] { "Pitch", "Yaw", "Roll" });
                     }
                     else {
@@ -126,14 +126,14 @@ namespace Edia.Lsl {
 
         protected override bool BuildSample() {
             
-            var position = TrackingSpace == TrackingSpaces.LocalSpace ? Origin.InverseTransformPoint(TrackedObject.position) : TrackedObject.position;
-            var rotation = TrackingSpace == TrackingSpaces.LocalSpace ? Quaternion.Inverse(Origin.rotation) * TrackedObject.rotation : TrackedObject.rotation;
+            var position = TrackingSpace == TrackingSpace.LocalSpace ? Origin.InverseTransformPoint(TrackedObject.position) : TrackedObject.position;
+            var rotation = TrackingSpace == TrackingSpace.LocalSpace ? Quaternion.Inverse(Origin.rotation) * TrackedObject.rotation : TrackedObject.rotation;
 
             sample[0] = position.x;
             sample[1] = position.y;
             sample[2] = position.z;
 
-            if (transformFormat == PoseFormatEdia.PosEul6D) {
+            if (transformFormat == PoseFormat.PosEul6D) {
                 sample[3] = rotation.eulerAngles.x;
                 sample[4] = rotation.eulerAngles.y;
                 sample[5] = rotation.eulerAngles.z;

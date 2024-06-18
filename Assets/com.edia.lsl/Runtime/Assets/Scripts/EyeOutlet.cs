@@ -32,7 +32,7 @@ namespace Edia.Lsl {
         public int _channelCount { get { return _channelNames.Count; } }
 
         [Tooltip("Save rotation of eyeball in Euler Angles or Quaternions?")]
-        public PoseFormatEdia EyePoseFormat = PoseFormatEdia.PosQuat7D;
+        public PoseFormat EyePoseFormat = PoseFormat.PosQuat7D;
 
         // We'region only sending floats for now
         public channel_format_t Format { get { return channel_format_t.cf_float32; } }
@@ -44,9 +44,9 @@ namespace Edia.Lsl {
         private List<string> _channelNames {
             get {
                 var chanNames = new List<string>();
-                if (EyePoseFormat == PoseFormatEdia.PosEul6D) {
+                if (EyePoseFormat == PoseFormat.PosEul6D) {
                     chanNames = new List<string>() { "PosX", "PosY", "PosZ", "Pitch", "Yaw", "Roll", "PupilDiameter", "Confidence", "TimestampET" };
-                } else if (EyePoseFormat == PoseFormatEdia.PosQuat7D) {
+                } else if (EyePoseFormat == PoseFormat.PosQuat7D) {
                     chanNames = new List<string>() { "PosX", "PosY", "PosZ", "RotW", "RotX", "RotY", "RotZ", "PupilDiameter", "Confidence", "TimestampET" };
                 } else {
                     Debug.LogError("Unknown PoseFormat for EyePose.");
