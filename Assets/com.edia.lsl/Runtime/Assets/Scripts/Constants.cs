@@ -5,9 +5,9 @@
 namespace Edia.Lsl {
 
     /// <summary>
-    /// A pose describes the combination of position (always x, y, z coordinates) and rotation (can be in Euler Angles [6D] or Quaternions [7D]) of an object.
+    /// Rotation can be in EulerAngles Angles or a Quaternion.
     /// </summary>
-    public enum PoseFormat { PosEul6D, PosQuat7D }
+    public enum RotationFormat { EulerAngles, Quaternion }
 
     /// <summary>
     /// Tracking space defines the reference system of an objects location and rotation (e.g., world space or local/relative to another object).
