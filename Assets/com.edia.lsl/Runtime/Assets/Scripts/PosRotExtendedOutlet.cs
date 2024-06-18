@@ -68,16 +68,15 @@ namespace Edia.Lsl {
         public override List<string> ChannelNames {
             get {
                 List<string> chanNames = new List<string>();
-                if ((transformFormat == PoseFormat.PosEul6D) || (transformFormat == PoseFormat.PosQuat7D)) {
-                    chanNames.AddRange(new string[] { "PosX", "PosY", "PosZ" });
+                chanNames.AddRange(new string[] { "PosX", "PosY", "PosZ" }); // sequence xyz is very important
 
-                    if (transformFormat == PoseFormat.PosEul6D) {
-                        chanNames.AddRange(new string[] { "Pitch", "Yaw", "Roll" });
-                    }
-                    else {
-                        chanNames.AddRange(new string[] { "RotX", "RotY", "RotZ", "RotW" });
-                    }
+                if (transformFormat == PoseFormat.PosEul6D) {
+                    chanNames.AddRange(new string[] { "Pitch", "Yaw", "Roll" }); // sequence -- pitch: x-rot, yaw:y-rot, roll:z-rot!
                 }
+                else if (transformFormat == PoseFormat.PosQuat7D) {
+                    chanNames.AddRange(new string[] { "RotX", "RotY", "RotZ", "RotW" }); // sequence xyzw is very important
+                }
+
                 return chanNames;
             }
         }
@@ -129,16 +128,19 @@ namespace Edia.Lsl {
             var position = TrackingSpace == TrackingSpace.LocalSpace ? Origin.InverseTransformPoint(TrackedObject.position) : TrackedObject.position;
             var rotation = TrackingSpace == TrackingSpace.LocalSpace ? Quaternion.Inverse(Origin.rotation) * TrackedObject.rotation : TrackedObject.rotation;
 
+            // sequence xyz is very important
             sample[0] = position.x;
             sample[1] = position.y;
             sample[2] = position.z;
 
             if (transformFormat == PoseFormat.PosEul6D) {
+                // sequence xyz is very important
                 sample[3] = rotation.eulerAngles.x;
                 sample[4] = rotation.eulerAngles.y;
                 sample[5] = rotation.eulerAngles.z;
             }
-            else {
+            else if (transformFormat == PoseFormat.PosQuat7D) {
+                // sequence xyzw is very important
                 sample[3] = rotation.x;
                 sample[4] = rotation.y;
                 sample[5] = rotation.z;
