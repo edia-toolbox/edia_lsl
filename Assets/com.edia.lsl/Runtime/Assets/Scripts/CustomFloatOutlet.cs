@@ -32,7 +32,7 @@ namespace Edia.Lsl {
 		public List<MonitoringItem> WatchList = new();
 
 		[Space(20)]
-		[Header("What to send when no new vector2 values are recieved.")]
+		[Header("What to send when no new values are read.")]
 		public EmptyPackageOptions OnNoUpdateUse = EmptyPackageOptions.Zero;
 		[Header("Custom float value to send as indicator there was no new data. Default=-99")]
 		public float CustomValue = -99f;
