@@ -6,6 +6,9 @@ using LSL4Unity.Utils;
 
 namespace Edia.Lsl {
 
+    public enum PoseFormatEdia { PosEul6D, PosQuat7D }
+    public enum TrackingSpaces { WorldSpace, LocalSpace }
+
     /// <summary>
     /// A LSL outlet which streams position and rotation data at custom rate (HZ). 
     /// 
@@ -14,8 +17,8 @@ namespace Edia.Lsl {
     /// </summary>
 	[RequireComponent(typeof(TimeSync))]
 	public class PosRotExtendedOutlet : AFloatOutlet {
-
-        public RotationFormat rotationFormat = RotationFormat.Quaternion;
+        
+        public PoseFormatEdia transformFormat = PoseFormatEdia.PosQuat7D;
 
         [Space(20)]
         [Tooltip("Assumed data rate, default = 90 (Unity VR).")]
@@ -30,14 +33,14 @@ namespace Edia.Lsl {
 
 		[Space(10)]
 		[Header("Tracking space and local origin (none = current parent)")]
-        public TrackingSpace TrackingSpace = TrackingSpace.WorldSpace;
+        public TrackingSpaces TrackingSpace = TrackingSpaces.WorldSpace;
         [Tooltip("Only used with Local Space. Leave none to use local parent.")]
         public Transform Origin;
 
         private void Awake() {
             TrackedObject = TrackedObject == null ? gameObject.transform : TrackedObject;
 
-            if (TrackingSpace == TrackingSpace.LocalSpace) {
+            if (TrackingSpace == TrackingSpaces.LocalSpace) {
                 if (Origin == null) {
                     if (TrackedObject.transform.parent != null) {
                         Origin = TrackedObject.transform.parent;
@@ -49,7 +52,7 @@ namespace Edia.Lsl {
                         Origin = worldOrigin.transform;
                     }
                 }
-                string locStr = TrackingSpace == TrackingSpace.LocalSpace ? $".LocalTo{Origin.name}" : "";
+                string locStr = TrackingSpace == TrackingSpaces.LocalSpace ? $".LocalTo{Origin.name}" : "";
                 StreamName = StreamName + locStr;
             }
             else {
@@ -68,15 +71,16 @@ namespace Edia.Lsl {
         public override List<string> ChannelNames {
             get {
                 List<string> chanNames = new List<string>();
-                chanNames.AddRange(new string[] { "PosX", "PosY", "PosZ" }); // sequence xyz is very important
+                if ((transformFormat == PoseFormatEdia.PosEul6D) || (transformFormat == PoseFormatEdia.PosQuat7D)) {
+                    chanNames.AddRange(new string[] { "PosX", "PosY", "PosZ" });
 
-                if (rotationFormat == RotationFormat.EulerAngles) {
-                    chanNames.AddRange(new string[] { "Pitch", "Yaw", "Roll" }); // sequence -- pitch: x-rot, yaw:y-rot, roll:z-rot!
+                    if (transformFormat == PoseFormatEdia.PosEul6D) {
+                        chanNames.AddRange(new string[] { "Pitch", "Yaw", "Roll" });
+                    }
+                    else {
+                        chanNames.AddRange(new string[] { "RotX", "RotY", "RotZ", "RotW" });
+                    }
                 }
-                else if (rotationFormat == RotationFormat.Quaternion) {
-                    chanNames.AddRange(new string[] { "RotX", "RotY", "RotZ", "RotW" }); // sequence xyzw is very important
-                }
-
                 return chanNames;
             }
         }
@@ -120,27 +124,24 @@ namespace Edia.Lsl {
 
 
         protected override void ExtendHash(Hash128 hash) {
-            hash.Append(rotationFormat.ToString());
+            hash.Append(transformFormat.ToString());
         }
 
         protected override bool BuildSample() {
             
-            var position = TrackingSpace == TrackingSpace.LocalSpace ? Origin.InverseTransformPoint(TrackedObject.position) : TrackedObject.position;
-            var rotation = TrackingSpace == TrackingSpace.LocalSpace ? Quaternion.Inverse(Origin.rotation) * TrackedObject.rotation : TrackedObject.rotation;
+            var position = TrackingSpace == TrackingSpaces.LocalSpace ? Origin.InverseTransformPoint(TrackedObject.position) : TrackedObject.position;
+            var rotation = TrackingSpace == TrackingSpaces.LocalSpace ? Quaternion.Inverse(Origin.rotation) * TrackedObject.rotation : TrackedObject.rotation;
 
-            // sequence xyz is very important
             sample[0] = position.x;
             sample[1] = position.y;
             sample[2] = position.z;
 
-            if (rotationFormat == RotationFormat.EulerAngles) {
-                // sequence xyz is very important
+            if (transformFormat == PoseFormatEdia.PosEul6D) {
                 sample[3] = rotation.eulerAngles.x;
                 sample[4] = rotation.eulerAngles.y;
                 sample[5] = rotation.eulerAngles.z;
             }
-            else if (rotationFormat == RotationFormat.Quaternion) {
-                // sequence xyzw is very important
+            else {
                 sample[3] = rotation.x;
                 sample[4] = rotation.y;
                 sample[5] = rotation.z;
