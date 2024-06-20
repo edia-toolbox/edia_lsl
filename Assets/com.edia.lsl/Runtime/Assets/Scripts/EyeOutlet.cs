@@ -148,7 +148,7 @@ namespace Edia.Lsl {
 
                 pushSample(timestampLsl);
 
-            } else if (EyeRotationFormat != RotationFormat.Quaternion) {
+            } else if (EyeRotationFormat == RotationFormat.Quaternion) {
 
                 Quaternion rotAsQuaternion = Quaternion.Euler(eyeRotationLocalEuler.x, eyeRotationLocalEuler.y, eyeRotationLocalEuler.z);
 
