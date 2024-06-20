@@ -7,6 +7,9 @@ using System;
 
 namespace Edia.Lsl {
 
+	/// <summary>
+	/// A LSL outlet which streams a vector2
+	/// </summary>
 	[RequireComponent(typeof(TimeSync))]
 	public class Vector2Outlet : AFloatOutlet {
 

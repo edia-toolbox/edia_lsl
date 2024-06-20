@@ -74,7 +74,6 @@ namespace Edia.Lsl {
 					OnFloatUpdate.Invoke(floatValue);
 				}
 				else if (currentObject is Vector2 vector2Value) {
-					//Debug.Log(vector2Value);
 					OnVector2Update.Invoke(vector2Value);
 				}
 				else if (currentObject is Vector3 vector3Value) {
