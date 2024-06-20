@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,10 +18,6 @@ namespace Edia.Lsl {
 		[Header("Referencing the parameter as a string. \nThis is the search path on the gameobject.\n\nExample: RectTransform.AnchoredPosition -> Vector2 parameter")]
 		[Tooltip("Case sensitive. Expects script API namings.")]
 		public string PathToParameter = string.Empty;
-
-		public List<Component> components = new();
-		public Component targetComponent = null;
-		public string targetComponentTarget = string.Empty;
 
 		[Header("Method hooks")]
 		public UnityEvent<float> OnFloatUpdate = new();
