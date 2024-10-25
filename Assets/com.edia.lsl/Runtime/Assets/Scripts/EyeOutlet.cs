@@ -34,7 +34,7 @@ namespace Edia.Lsl {
         public channel_format_t Format { get { return channel_format_t.cf_float32; } }
 
         private StreamOutlet _outlet;
-        private float[] _sample;
+        private double[] _sample;
         private bool UniqueFromInstanceId = true;
 
         private List<string> _channelNames {
@@ -61,7 +61,7 @@ namespace Edia.Lsl {
         }
 
         private void Start() {
-            _sample = new float[_channelCount];
+            _sample = new double[_channelCount];
 
             StreamName += $".{EyeId}";
 
@@ -132,7 +132,7 @@ namespace Edia.Lsl {
         /// <param name="timestampEt">The eye tracker timestamp. Default is 0f.</param>
         /// <param name="timestampLsl">The LSL timestamp. Default is 0 and will timestamp the sample on sending.</param>
         public void PushSample(Vector3 eyePositionLocal, Vector3 eyeRotationLocalEuler, float pupilDiameter = 0f,
-                               float confidence = 0f, float timestampEt = 0f, double timestampLsl = 0) {
+                               float confidence = 0f, double timestampEt = 0f, double timestampLsl = 0) {
 
             if (EyeRotationFormat == RotationFormat.EulerAngles) {
 
@@ -167,7 +167,7 @@ namespace Edia.Lsl {
         /// <param name="timestampEt">The eye tracker timestamp. Default is 0f.</param>
         /// <param name="timestampLsl">The LSL timestamp. Default is 0 and will timestamp the sample on sending.</param>
         public void PushSample(Vector3 eyePositionLocal, Quaternion eyeRotationLocalQuaternion, float pupilDiameter = 0f,
-                               float confidence = 0f, float timestampEt = 0f, double timestampLsl = 0) {
+                               float confidence = 0f, double timestampEt = 0f, double timestampLsl = 0) {
 
             if (EyeRotationFormat == RotationFormat.Quaternion) {
                 _sample[0] = eyePositionLocal.x;
