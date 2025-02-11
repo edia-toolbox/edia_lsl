@@ -6,7 +6,7 @@ namespace Edia.Lsl {
 
     public class EyeOutlet : MonoBehaviour, ILslEyeOutlet {
 
-        public enum EyeTrackingSamplingRate { ViveProEye_120Hz, QuestPro_72Hz, QuestPro_90Hz, VarjoAero_100Hz, VarjoAero_200Hz, IDoNotKnow }
+        public enum EyeTrackingSamplingRate { ViveProEye_120Hz, QuestPro_30Hz, VarjoAero_100Hz, VarjoAero_200Hz, IDoNotKnow }
 
         [field: Space(20)]
         [Tooltip("Which eye is this streaming.")]
@@ -41,9 +41,9 @@ namespace Edia.Lsl {
             get {
                 var chanNames = new List<string>();
                 if (EyeRotationFormat == RotationFormat.EulerAngles) {
-                    chanNames = new List<string>() { "PosX", "PosY", "PosZ", "Pitch", "Yaw", "Roll", "PupilDiameter", "Confidence", "TimestampET" };
+                    chanNames = new List<string>() { "PosX", "PosY", "PosZ", "Pitch", "Yaw", "Roll", "PupilDiameter", "Openness", "Confidence", "TimestampET" };
                 } else if (EyeRotationFormat == RotationFormat.Quaternion) {
-                    chanNames = new List<string>() { "PosX", "PosY", "PosZ", "RotW", "RotX", "RotY", "RotZ", "PupilDiameter", "Confidence", "TimestampET" };
+                    chanNames = new List<string>() { "PosX", "PosY", "PosZ", "RotW", "RotX", "RotY", "RotZ", "PupilDiameter", "Openness", "Confidence", "TimestampET" };
                 } else {
                     Debug.LogError("Unknown RotationFormat for EyePose.");
                 }
@@ -77,11 +77,8 @@ namespace Edia.Lsl {
                     case EyeTrackingSamplingRate.ViveProEye_120Hz:
                         samplingRate = 120;
                         break;
-                    case EyeTrackingSamplingRate.QuestPro_72Hz:
-                        samplingRate = 72;
-                        break;
-                    case EyeTrackingSamplingRate.QuestPro_90Hz:
-                        samplingRate = 90;
+                    case EyeTrackingSamplingRate.QuestPro_30Hz:
+                        samplingRate = 30;
                         break;
                     case EyeTrackingSamplingRate.VarjoAero_100Hz:
                         samplingRate = 100;
@@ -128,10 +125,11 @@ namespace Edia.Lsl {
         /// <param name="eyePositionLocal">The local eye position.</param>
         /// <param name="eyeRotationLocalEuler">The local eye rotation in Euler Angles.</param>
         /// <param name="pupilDiameter">The diameter of the pupil. Default is 0f.</param>
+        /// <param name="openness">The openness of the eye. Default is 0f.</param>
         /// <param name="confidence">The confidence level of the eye tracking data. Default is 0f.</param>
         /// <param name="timestampEt">The eye tracker timestamp. Default is 0f.</param>
         /// <param name="timestampLsl">The LSL timestamp. Default is 0 and will timestamp the sample on sending.</param>
-        public void PushSample(Vector3 eyePositionLocal, Vector3 eyeRotationLocalEuler, float pupilDiameter = 0f,
+        public void PushSample(Vector3 eyePositionLocal, Vector3 eyeRotationLocalEuler, float pupilDiameter = 0f, float openness = 0f,
                                float confidence = 0f, double timestampEt = 0f, double timestampLsl = 0) {
 
             if (EyeRotationFormat == RotationFormat.EulerAngles) {
@@ -143,8 +141,9 @@ namespace Edia.Lsl {
                 _sample[4] = eyeRotationLocalEuler.y;
                 _sample[5] = eyeRotationLocalEuler.z;
                 _sample[6] = pupilDiameter;
-                _sample[7] = confidence;
-                _sample[8] = timestampEt;
+                _sample[7] = openness;
+                _sample[8] = confidence;
+                _sample[9] = timestampEt;
 
                 pushSample(timestampLsl);
 
@@ -152,7 +151,7 @@ namespace Edia.Lsl {
 
                 Quaternion rotAsQuaternion = Quaternion.Euler(eyeRotationLocalEuler.x, eyeRotationLocalEuler.y, eyeRotationLocalEuler.z);
 
-                PushSample(eyePositionLocal, rotAsQuaternion, pupilDiameter, confidence, timestampEt, timestampLsl);
+                PushSample(eyePositionLocal, rotAsQuaternion, pupilDiameter, openness, confidence, timestampEt, timestampLsl);
             }
         }
 
@@ -163,10 +162,11 @@ namespace Edia.Lsl {
         /// <param name="eyePositionLocal">The local eye position.</param>
         /// <param name="eyeRotationLocalQuaternion">The local eye rotation as Quaternion.</param>
         /// <param name="pupilDiameter">The diameter of the pupil. Default is 0f.</param>
+        /// <param name="openness">The openness of the eye. Default is 0f.</param>
         /// <param name="confidence">The confidence level of the eye tracking data. Default is 0f.</param>
         /// <param name="timestampEt">The eye tracker timestamp. Default is 0f.</param>
         /// <param name="timestampLsl">The LSL timestamp. Default is 0 and will timestamp the sample on sending.</param>
-        public void PushSample(Vector3 eyePositionLocal, Quaternion eyeRotationLocalQuaternion, float pupilDiameter = 0f,
+        public void PushSample(Vector3 eyePositionLocal, Quaternion eyeRotationLocalQuaternion, float pupilDiameter = 0f, float openness = 0f,
                                float confidence = 0f, double timestampEt = 0f, double timestampLsl = 0) {
 
             if (EyeRotationFormat == RotationFormat.Quaternion) {
@@ -178,15 +178,16 @@ namespace Edia.Lsl {
                 _sample[5] = eyeRotationLocalQuaternion.y;
                 _sample[6] = eyeRotationLocalQuaternion.z;
                 _sample[7] = pupilDiameter;
-                _sample[8] = confidence;
-                _sample[9] = timestampEt;
+                _sample[8] = openness;
+                _sample[9] = confidence;
+                _sample[10] = timestampEt;
 
                 pushSample(timestampLsl);
             } else if (EyeRotationFormat == RotationFormat.EulerAngles) {
 
                 Vector3 rotAsEuler = eyeRotationLocalQuaternion.eulerAngles;
 
-                PushSample(eyePositionLocal, rotAsEuler, pupilDiameter, confidence, timestampEt, timestampLsl);
+                PushSample(eyePositionLocal, rotAsEuler, pupilDiameter, openness, confidence, timestampEt, timestampLsl);
             }
         }
 
