@@ -8,9 +8,8 @@ namespace Edia.Lsl {
 
         public enum EyeTrackingSamplingRate { ViveProEye_120Hz, QuestPro_30Hz, VarjoAero_100Hz, VarjoAero_200Hz, IDoNotKnow }
 
-        [field: Space(20)]
         [Tooltip("Which eye is this streaming.")]
-        [field: Header("Which eye?")]
+        [Header("Which eye?")]
         [SerializeField]
         private Edia.Constants.EyeId _eyeId = Constants.EyeId.CENTER;
         public Edia.Constants.EyeId EyeId {
@@ -23,19 +22,19 @@ namespace Edia.Lsl {
         public string StreamName = "EDIA.Eye";
         public string StreamType = "Eye.Data";
         public bool IrregularRate = false;
+        
         [Tooltip("How fast does your eye tracker provide samples?")]
         public EyeTrackingSamplingRate ExpectedSamplingRate = EyeTrackingSamplingRate.ViveProEye_120Hz;
-        public int _channelCount { get { return _channelNames.Count; } }
+        private int _channelCount { get { return _channelNames.Count; } }
 
         [Tooltip("Save rotation of eyeball in EulerAngles Angles or Quaternions?")]
         public RotationFormat EyeRotationFormat = RotationFormat.EulerAngles;
 
-        // We'region only sending floats for now
-        public channel_format_t Format { get { return channel_format_t.cf_float32; } }
-
+        // We're only sending floats for now
+        private channel_format_t _format { get { return channel_format_t.cf_float32; } }
         private StreamOutlet _outlet;
         private double[] _sample;
-        private bool UniqueFromInstanceId = true;
+        private bool _isUniqueFromInstanceId = true;
 
         private List<string> _channelNames {
             get {
@@ -51,15 +50,6 @@ namespace Edia.Lsl {
             }
         }
 
-
-        // Add an XML element for each channel. The automatic version adds only channel labels. Override to add unit, location, etc.
-        private void FillChannelsHeader(XMLElement channels) {
-            foreach (var chanName in _channelNames) {
-                XMLElement chan = channels.append_child("channel");
-                chan.append_child_value("label", chanName);
-            }
-        }
-
         private void Start() {
             _sample = new double[_channelCount];
 
@@ -68,7 +58,7 @@ namespace Edia.Lsl {
             var hash = new Hash128();
             hash.Append(StreamName);
             hash.Append(StreamType);
-            if (UniqueFromInstanceId)
+            if (_isUniqueFromInstanceId)
                 hash.Append(gameObject.GetInstanceID());
 
             double samplingRate = 0;
@@ -100,7 +90,7 @@ namespace Edia.Lsl {
             }
 
             double dataRate = IrregularRate ? LSL.LSL.IRREGULAR_RATE : samplingRate;
-            StreamInfo streamInfo = new StreamInfo(StreamName, StreamType, _channelCount, dataRate, Format, hash.ToString());
+            StreamInfo streamInfo = new StreamInfo(StreamName, StreamType, _channelCount, dataRate, _format, hash.ToString());
 
             // Build XML header. See xdf wiki for recommendations: https://github.com/sccn/xdf/wiki/Meta-Data
             XMLElement acq_el = streamInfo.desc().append_child("acquisition");
@@ -110,18 +100,22 @@ namespace Edia.Lsl {
 
             _outlet = new StreamOutlet(streamInfo);
         }
+        
+        // Add an XML element for each channel. The automatic version adds only channel labels. Override to add unit, location, etc.
+        private void FillChannelsHeader(XMLElement channels) {
+            foreach (var chanName in _channelNames) {
+                XMLElement chan = channels.append_child("channel");
+                chan.append_child_value("label", chanName);
+            }
+        }
 
+
+        // TODO: Add summary (all public methods should have summaries)
         public double GetLslTime() {
             return LSL.LSL.local_clock();
         }
 
-        private void Awake() {
-        }
-
-
-        ///<summary>
-        /// Builds and pushes a sample with eye tracking data.
-        /// </summary>
+        ///<summary> Builds and pushes a sample with eye tracking data. </summary>
         /// <param name="eyePositionLocal">The local eye position.</param>
         /// <param name="eyeRotationLocalEuler">The local eye rotation in Euler Angles.</param>
         /// <param name="pupilDiameter">The diameter of the pupil. Default is 0f.</param>
@@ -132,6 +126,7 @@ namespace Edia.Lsl {
         public void PushSample(Vector3 eyePositionLocal, Vector3 eyeRotationLocalEuler, float pupilDiameter = 0f, float openness = 0f,
                                float confidence = 0f, double timestampEt = 0f, double timestampLsl = 0) {
 
+            // TODO: Double if: convert into switch
             if (EyeRotationFormat == RotationFormat.EulerAngles) {
 
                 _sample[0] = eyePositionLocal.x;
@@ -156,9 +151,7 @@ namespace Edia.Lsl {
         }
 
 
-        ///<summary>
-        /// Builds and pushes a sample with eye tracking data.
-        /// </summary>
+        ///<summary> Builds and pushes a sample with eye tracking data. </summary>
         /// <param name="eyePositionLocal">The local eye position.</param>
         /// <param name="eyeRotationLocalQuaternion">The local eye rotation as Quaternion.</param>
         /// <param name="pupilDiameter">The diameter of the pupil. Default is 0f.</param>
@@ -169,11 +162,12 @@ namespace Edia.Lsl {
         public void PushSample(Vector3 eyePositionLocal, Quaternion eyeRotationLocalQuaternion, float pupilDiameter = 0f, float openness = 0f,
                                float confidence = 0f, double timestampEt = 0f, double timestampLsl = 0) {
 
+            // TODO: Double if: convert into switch
             if (EyeRotationFormat == RotationFormat.Quaternion) {
                 _sample[0] = eyePositionLocal.x;
                 _sample[1] = eyePositionLocal.y;
                 _sample[2] = eyePositionLocal.z;
-                _sample[3] = eyeRotationLocalQuaternion.w; // watch out for wxyz sequence — see header!
+                _sample[3] = eyeRotationLocalQuaternion.w; // watch out for wxyz sequence â€” see header!
                 _sample[4] = eyeRotationLocalQuaternion.x;
                 _sample[5] = eyeRotationLocalQuaternion.y;
                 _sample[6] = eyeRotationLocalQuaternion.z;
@@ -191,9 +185,8 @@ namespace Edia.Lsl {
             }
         }
 
-
         private void pushSample(double timestamp = 0) {
-            if (_outlet == null)
+            if (_outlet is null)
                 return;
             _outlet.push_sample(_sample, timestamp);
         }
