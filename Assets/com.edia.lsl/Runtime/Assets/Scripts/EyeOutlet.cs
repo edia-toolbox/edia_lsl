@@ -109,9 +109,8 @@ namespace Edia.Lsl {
             }
         }
 
-
-        // TODO: Add summary (all public methods should have summaries)
         public double GetLslTime() {
+        /// <summary> Get the local LSL clock time (in s). </summary>
             return LSL.LSL.local_clock();
         }
 
@@ -126,27 +125,29 @@ namespace Edia.Lsl {
         public void PushSample(Vector3 eyePositionLocal, Vector3 eyeRotationLocalEuler, float pupilDiameter = 0f, float openness = 0f,
                                float confidence = 0f, double timestampEt = 0f, double timestampLsl = 0) {
 
-            // TODO: Double if: convert into switch
-            if (EyeRotationFormat == RotationFormat.EulerAngles) {
+            switch (EyeRotationFormat) {
+                case RotationFormat.EulerAngles:
+                    _sample[0] = eyePositionLocal.x;
+                    _sample[1] = eyePositionLocal.y;
+                    _sample[2] = eyePositionLocal.z;
+                    _sample[3] = eyeRotationLocalEuler.x;
+                    _sample[4] = eyeRotationLocalEuler.y;
+                    _sample[5] = eyeRotationLocalEuler.z;
+                    _sample[6] = pupilDiameter;
+                    _sample[7] = openness;
+                    _sample[8] = confidence;
+                    _sample[9] = timestampEt;
+                    pushSample(timestampLsl);
+                    break;
 
-                _sample[0] = eyePositionLocal.x;
-                _sample[1] = eyePositionLocal.y;
-                _sample[2] = eyePositionLocal.z;
-                _sample[3] = eyeRotationLocalEuler.x;
-                _sample[4] = eyeRotationLocalEuler.y;
-                _sample[5] = eyeRotationLocalEuler.z;
-                _sample[6] = pupilDiameter;
-                _sample[7] = openness;
-                _sample[8] = confidence;
-                _sample[9] = timestampEt;
+                case RotationFormat.Quaternion:
+                    Quaternion rotAsQuaternion = Quaternion.Euler(eyeRotationLocalEuler.x, eyeRotationLocalEuler.y, eyeRotationLocalEuler.z);
+                    PushSample(eyePositionLocal, rotAsQuaternion, pupilDiameter, openness, confidence, timestampEt, timestampLsl);
+                    break;
 
-                pushSample(timestampLsl);
-
-            } else if (EyeRotationFormat == RotationFormat.Quaternion) {
-
-                Quaternion rotAsQuaternion = Quaternion.Euler(eyeRotationLocalEuler.x, eyeRotationLocalEuler.y, eyeRotationLocalEuler.z);
-
-                PushSample(eyePositionLocal, rotAsQuaternion, pupilDiameter, openness, confidence, timestampEt, timestampLsl);
+                default:
+                    Debug.LogError("Unknown RotationFormat for EyePose.");
+                    break;
             }
         }
 
@@ -162,26 +163,30 @@ namespace Edia.Lsl {
         public void PushSample(Vector3 eyePositionLocal, Quaternion eyeRotationLocalQuaternion, float pupilDiameter = 0f, float openness = 0f,
                                float confidence = 0f, double timestampEt = 0f, double timestampLsl = 0) {
 
-            // TODO: Double if: convert into switch
-            if (EyeRotationFormat == RotationFormat.Quaternion) {
-                _sample[0] = eyePositionLocal.x;
-                _sample[1] = eyePositionLocal.y;
-                _sample[2] = eyePositionLocal.z;
-                _sample[3] = eyeRotationLocalQuaternion.w; // watch out for wxyz sequence — see header!
-                _sample[4] = eyeRotationLocalQuaternion.x;
-                _sample[5] = eyeRotationLocalQuaternion.y;
-                _sample[6] = eyeRotationLocalQuaternion.z;
-                _sample[7] = pupilDiameter;
-                _sample[8] = openness;
-                _sample[9] = confidence;
-                _sample[10] = timestampEt;
+            switch (EyeRotationFormat) {
+                case RotationFormat.Quaternion:
+                    _sample[0] = eyePositionLocal.x;
+                    _sample[1] = eyePositionLocal.y;
+                    _sample[2] = eyePositionLocal.z;
+                    _sample[3] = eyeRotationLocalQuaternion.w; // watch out for wxyz sequence — see header!
+                    _sample[4] = eyeRotationLocalQuaternion.x;
+                    _sample[5] = eyeRotationLocalQuaternion.y;
+                    _sample[6] = eyeRotationLocalQuaternion.z;
+                    _sample[7] = pupilDiameter;
+                    _sample[8] = openness;
+                    _sample[9] = confidence;
+                    _sample[10] = timestampEt;
+                    pushSample(timestampLsl);
+                    break;
 
-                pushSample(timestampLsl);
-            } else if (EyeRotationFormat == RotationFormat.EulerAngles) {
+                case RotationFormat.EulerAngles:
+                    Vector3 rotAsEuler = eyeRotationLocalQuaternion.eulerAngles;
+                    PushSample(eyePositionLocal, rotAsEuler, pupilDiameter, openness, confidence, timestampEt, timestampLsl);
+                    break;
 
-                Vector3 rotAsEuler = eyeRotationLocalQuaternion.eulerAngles;
-
-                PushSample(eyePositionLocal, rotAsEuler, pupilDiameter, openness, confidence, timestampEt, timestampLsl);
+                default:
+                    Debug.LogError("Unknown RotationFormat for EyePose.");
+                    break;
             }
         }
 
