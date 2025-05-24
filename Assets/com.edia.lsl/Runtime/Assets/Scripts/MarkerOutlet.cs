@@ -9,6 +9,7 @@ namespace Edia.Lsl {
 
     [ScriptOrder(-999)] // this needs to be executed as soon as possible in Update()
     [RequireComponent(typeof(TimeSync))]
+    [EdiaHeader("EDIA LSL", "-> Marker Outlet","Sends markers to the stream.")]
     public class MarkerOutlet : AStringOutlet
     {
 

@@ -13,6 +13,7 @@ namespace Edia.Lsl {
     /// extended for usage within the EDIA framework (Felix Klotzsche, 2024).
     /// </summary>
 	[RequireComponent(typeof(TimeSync))]
+    [EdiaHeader("EDIA LSL", "-> Pose Outlet","Streams position and rotation data at custom rate (HZ)")]
 	public class PosRotExtendedOutlet : AFloatOutlet {
 
         public RotationFormat rotationFormat = RotationFormat.Quaternion;

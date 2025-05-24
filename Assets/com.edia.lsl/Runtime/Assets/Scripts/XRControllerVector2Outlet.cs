@@ -8,6 +8,7 @@ using System;
 
 namespace Edia.Lsl {
 	[RequireComponent(typeof(TimeSync))]
+	[EdiaHeader("EDIA LSL", "-> XR controller Vector2 Outlet","Streams controller thumbstick X,Y data.")]
 	public class XRControllerVector2Outlet : AFloatOutlet {
 
 		Vector2 Values;

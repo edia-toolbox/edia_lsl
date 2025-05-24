@@ -24,6 +24,7 @@ namespace Edia.Lsl {
 	/// A LSL outlet which streams one stream with all float values listed in the watchlist
 	/// </summary>
 	[RequireComponent(typeof(TimeSync))]
+	[EdiaHeader("EDIA LSL", "-> Custom Float Outlet","Streams one stream with all float values listed in the watchlist")]
 	public class CustomFloatOutlet : AFloatOutlet {
 
 		public enum EmptyPackageOptions { Zero, LastValue, CustomValue }

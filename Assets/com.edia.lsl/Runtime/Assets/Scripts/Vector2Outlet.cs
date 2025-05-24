@@ -11,6 +11,7 @@ namespace Edia.Lsl {
 	/// A LSL outlet which streams a vector2
 	/// </summary>
 	[RequireComponent(typeof(TimeSync))]
+	[EdiaHeader("EDIA LSL", "-> Vector2 Outlet","Streams X,Y data")]
 	public class Vector2Outlet : AFloatOutlet {
 
 		public enum EmptyPackageOptions { Zero, LastValue, CustomValue }
