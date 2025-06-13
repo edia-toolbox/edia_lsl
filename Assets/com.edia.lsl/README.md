@@ -29,3 +29,9 @@ Check out the demo scenes in [Assets/Samples](Assets/Samples) (or [Assets/com.ed
 3. [LSL Slack channel](https://labstreaminglayer.slack.com/)
 4. [BrainVision LSL Viewer](https://pressrelease.brainproducts.com/lsl-viewer/): Useful tool (with some limitations) to quickly visualize LSL streams. 
 5. [LSL LabRecorder](https://github.com/labstreaminglayer/App-LabRecorder): Useful tool (with some learning curve) to record LSL streams to disk. 
+
+## Credits
+If you are using this repository for your research or other public work, please cite:
+1. the LSL4Unity repository: https://github.com/labstreaminglayer/LSL4Unity
+2. the LSL preprint: https://www.biorxiv.org/content/10.1101/2024.02.13.580071v1
+3. the EDIA Toolbox: https://github.com/edia-toolbox/edia_core/
