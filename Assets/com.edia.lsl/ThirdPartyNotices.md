@@ -1,13 +1,5 @@
 This package contains third-party software components governed by the license(s) indicated below:
 
-Component Name: XR Hands
-License Type: "Unity Package Distribution License"
-[Unity Package Distribution License](https://unity.com/legal/licenses/unity-package-distribution-license)
-
-Component Name: XR Interaction Toolkit
-License Type: "Unity Companion License"
-[Unity Companion License](https://unity.com/legal/licenses/unity-companion-license)
-
 Component Name: TextMesh Pro
 License Type: "Unity Companion License"
 [Unity Companion License](https://unity.com/legal/licenses/unity-companion-license)
