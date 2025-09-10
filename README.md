@@ -1,22 +1,33 @@
+<p align="center">
+  <img src="./Assets/com.edia.lsl/Editor/Resources/Icons/IconLSL.png" width="128" />
+</p>
+
 # EDIA LSL
 
 This is a wrapper around the [LSL4Unity](https://github.com/labstreaminglayer/LSL4Unity) repository.  
 We provide some additional functionalities (e.g., more advanced or specific sending of event markers) and useful implementations of concepts common to many experiments.
 
-## Table of Contents
+## Installation
 
-- [Installing as a package](#installing-as-a-package)
-- [Usage](#usage)
+### Dependencies
+Make sure you have installed [EDIA Core](https://github.com/edia-toolbox/edia_core.git) and its dependencies. 
 
-## Installing as a package
+### As a package (Unity package manager)
+- In Unity open the package manager window → **Window** → **Package Manager**  
+- Use `Install from GIT URL`  
+- To install:
+  - **Latest release**:  
+    `https://github.com/edia-toolbox/edia_lsl.git?path=Assets/com.edia.lsl#main`
+  - **Specific release** (replace `vX.Y.Z` with a version from the [release list](https://github.com/edia-toolbox/edia_lsl/releases)):  
+    `https://github.com/edia-toolbox/edia_lsl.git#vX.Y.Z`
+  - **Development version**:  
+    `https://github.com/edia-toolbox/edia_lsl.git?path=Assets/com.edia.lsl`
+- Hit `ADD`
 
-There are different ways to achieve this. We recommend to always use Unity's `PackageManager`. Click on the `+` sign (top left corner) and then add the package from 
-1. **git** (*recommended*; assumes that you have access rights to this repo on gitlab or github)  
-    Use the link to the repository extended by `?path=Assets/com.edia.lsl` (e.g., the full path should be something like:  
-    `git@gitlab.gwdg.de:3dia/edia_lsl.git?path=Assets/com.edia.lsl` )  
+Unity now starts to download and install the `com.edia.lsl` package. 
 
-2. **from disk**:  
-    Download the content in [Assets/com.edia.lsl](Assets/com.edia.lsl), unzip, and put into a local directory on your machine. Then install from this location.
+### For development
+Clone this repository. 
 
 ## Usage
 
