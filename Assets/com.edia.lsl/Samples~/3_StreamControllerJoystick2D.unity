@@ -195,7 +195,7 @@ PrefabInstance:
     - target: {fileID: 5131188763552657155, guid: 6906e55826a6d36498d05584396a801d,
         type: 3}
       propertyPath: m_Name
-      value: '[ LSL XRController Vector2 Outlet ]'
+      value: LSL-XRController-Vector2Outlet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1480,10 +1480,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b323bb0d665a5254f832fd80fcd0a3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
-  _intensity: 0
-  _color: {r: 0, g: 0, b: 0, a: 1}
-  _fadeImage: {fileID: 0}
+  _defaultSpeed: 1
+  FadeImage: {fileID: 0}
 --- !u!114 &3263511791290128208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2991,7 +2989,7 @@ PrefabInstance:
     - target: {fileID: 5131188763552657155, guid: 6906e55826a6d36498d05584396a801d,
         type: 3}
       propertyPath: m_Name
-      value: '[ LSL XRController Vector2 Outlet ]'
+      value: LSL-XRController-Vector2Outlet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

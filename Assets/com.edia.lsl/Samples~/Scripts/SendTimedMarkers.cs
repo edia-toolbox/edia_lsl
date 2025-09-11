@@ -28,13 +28,13 @@ namespace Edia.Lsl {
 				_markerOutlet.SendMarker("SpecifiedInEditor");
 
 				// Will send the marker immediately
-				_markerOutlet.SendMarker("Now", MarkerOutlet.MomentForMarker.Now);
+				_markerOutlet.SendMarker("Now", MarkerOutlet.CustomMomentForMarker.Now);
 
 				// Will send the marker at the end of the current frame
-				_markerOutlet.SendMarker("EndOfThisFrame", MarkerOutlet.MomentForMarker.EndOfFrame);
+				_markerOutlet.SendMarker("EndOfThisFrame", MarkerOutlet.CustomMomentForMarker.EndOfThisFrame);
 
 				// Will send the marker at the start of the next frame
-				_markerOutlet.SendMarker("StartOfNextFrame", MarkerOutlet.MomentForMarker.StartOfFrame);
+				_markerOutlet.SendMarker("StartOfNextFrame", MarkerOutlet.CustomMomentForMarker.StartOfNextFrame);
 
 				// Will send the marker with a delay of 4 frames (and then at the beginning of the 5th frame from now)
 				int nFramesDelay = 4;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -495,6 +495,7 @@ GameObject:
   - component: {fileID: 977530799}
   - component: {fileID: 977530798}
   - component: {fileID: 977530802}
+  - component: {fileID: 977530804}
   m_Layer: 0
   m_Name: Cube_Inlet
   m_TagString: Untagged
@@ -601,12 +602,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StreamName: Unity.PosRot.Capsule
-  StreamType: 
-  moment: 0
+  StreamType: Unity.Transform
+  moment: 3
   ProcessLastInChunkOnly: 1
   resolver: {fileID: 0}
   Offset: {x: 1, y: 1, z: 0}
   UseOffset: 1
+--- !u!114 &977530804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977530796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd6e101497b228478472b9af1a56fd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1081904551
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +634,7 @@ GameObject:
   - component: {fileID: 1081904552}
   - component: {fileID: 1081904558}
   - component: {fileID: 1081904560}
-  - component: {fileID: 1081904559}
+  - component: {fileID: 1081904561}
   m_Layer: 0
   m_Name: Capsule_Outlet
   m_TagString: Untagged
@@ -731,24 +744,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResetInterval: 2
   RigidBody: {fileID: 0}
---- !u!114 &1081904559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1081904551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d87d6ca5666d8849ac7d9acced7284b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StreamName: Unity.PosRot.Capsule
-  StreamType: Unity.Transform
-  moment: 1
-  IrregularRate: 0
-  transformFormat: 1
-  Target: {fileID: 0}
 --- !u!114 &1081904560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,6 +756,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd6e101497b228478472b9af1a56fd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1081904561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081904551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f730ecc6b78bd46bbe927b1ba31a5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StreamName: Unity.PosRot.Capsule
+  StreamType: Unity.Transform
+  moment: 3
+  IrregularRate: 0
+  transformFormat: 1
+  DisplayRefreshRate: 90
+  TrackedObject: {fileID: 0}
+  UseLocalSpace: 0
+  Origin: {fileID: 0}
 --- !u!1 &1511094006
 GameObject:
   m_ObjectHideFlags: 0

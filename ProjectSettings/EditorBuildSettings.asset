@@ -6,10 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Samples/com.edia.lsl/1_MinimalExample.unity
+    path: Assets/EdiaSamples/1_MinimalExample.unity
     guid: 418ac04f71269284a80ac784abd2b6c0
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: ab2bbc59f3500d64188a7e03998d790e,
       type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 48ef1bc3b9b5b9149831129b21e9e0d0,
       type: 2}
+  m_UseUCBPForAssetBundles: 0

@@ -35,7 +35,7 @@ namespace LSL4Unity.Samples.Complex
             if (_elapsedTime >= ResetInterval)
             {
                 gameObject.transform.position = _startPosition;
-                RigidBody.velocity = new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f));
+                RigidBody.linearVelocity = new Vector3(Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f), Random.Range(-2.0f, 2.0f));
                 RigidBody.angularVelocity = new Vector3(Random.Range(-6.0f, 6.0f), Random.Range(-6.0f, 6.0f), Random.Range(-6.0f, 6.0f));
                 _elapsedTime = 0.0f;
             }
