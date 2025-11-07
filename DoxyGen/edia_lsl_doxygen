@@ -42,13 +42,13 @@ DOXYFILE_ENCODING      = UTF-8
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME           = "EDIA Core"
+PROJECT_NAME           = "EDIA LSL"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         = 0.6
+PROJECT_NUMBER         = 0.3.0
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewers a
@@ -61,20 +61,20 @@ PROJECT_BRIEF          = "A Unity XR toolbox for research"
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = Img/IconEdia_64x64.png
+PROJECT_LOGO           = C:/Users/jur/Documents/projects/edia_lsl/Library/PackageCache/com.edia.core@782ac2e2830b/Editor/Resources/Icons/IconLSL.png
 
 # With the PROJECT_ICON tag one can specify an icon that is included in the tabs
 # when the HTML document is shown. Doxygen will copy the logo to the output
 # directory.
 
-PROJECT_ICON           = Img/IconEdia_64x64.png
+PROJECT_ICON           = C:/Users/jur/Documents/projects/edia_lsl/Library/PackageCache/com.edia.core@782ac2e2830b/Editor/Resources/Icons/IconLSL.png
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
 # entered, it will be relative to the location where Doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = ../Assets/com.edia.core/Documentation~
+OUTPUT_DIRECTORY       = ../Assets/com.edia.lsl/Documentation~
 
 # If the CREATE_SUBDIRS tag is set to YES then Doxygen will create up to 4096
 # sub-directories (in 2 levels) under the output directory of each output format
@@ -1005,7 +1005,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../Assets/com.edia.core/Runtime/Base/Scripts \
+INPUT                  = ../Assets/com.edia.lsl/Runtime/Assets/Scripts \
                          ../Assets/com.edia.core/Runtime/Controller/Scripts
 
 # This tag can be used to specify the character encoding of the source files
