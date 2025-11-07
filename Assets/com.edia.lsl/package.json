@@ -1,7 +1,7 @@
 {
   "name": "com.edia.lsl",
   "displayName": "EDIA LSL",
-  "version": "0.3.0",
+  "version": "0.6.0",
   "unity": "6000.0",
   "description": "EDIA: LSL functionalities",
   "keywords": [
@@ -15,15 +15,15 @@
     "name": "EDIA"
   },
   "dependencies": {
-    "com.edia.core": "0.5.0",
-	"com.unity.inputsystem": "1.7.0"
+    "com.edia.core": "0.6.0",
+    "com.unity.inputsystem": "1.7.0"
   },
   "samples": [
     {
       "displayName": "EDIA LSL demo scenes",
       "description": "Scenes demonstrating basic LSL capabilities.",
       "path": "Samples~/"
-   }
+    }
   ],
   "hideInEditor": false
 }
