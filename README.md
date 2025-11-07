@@ -43,3 +43,8 @@ If you are using this repository for your research or other public work, please 
 1. the LSL4Unity repository: https://github.com/labstreaminglayer/LSL4Unity
 2. the LSL preprint: https://www.biorxiv.org/content/10.1101/2024.02.13.580071v1
 3. the EDIA Toolbox: https://github.com/edia-toolbox/edia_core/
+
+## Contribution
+We are happy to receive feedback and contributions. If you want to report a bug, please open a GitHub issue. 
+If you have questions or suggestions, please use the [GitHub Discussion board](https://github.com/edia-toolbox/edia_core/discussions). 
+If you want to [contribute to EDIA](https://github.com/edia-toolbox/edia_core/blob/dev/CONTRIBUTOR.md), ideally first reach out to us (e.g., via the [Discussion board](https://github.com/edia-toolbox/edia_core/discussions) or [email](mailto:edia.toolbox@gmail.com)), and/or post a pull request.  
