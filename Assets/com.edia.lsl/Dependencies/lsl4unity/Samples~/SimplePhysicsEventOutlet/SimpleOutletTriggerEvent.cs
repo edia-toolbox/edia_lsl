@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LSL;
+using LSL4Unity.Utils;
 
 namespace LSL4Unity.Samples.SimplePhysicsEvent
 {
@@ -28,7 +29,7 @@ namespace LSL4Unity.Samples.SimplePhysicsEvent
             var hash = new Hash128();
             hash.Append(StreamName);
             hash.Append(StreamType);
-            hash.Append(gameObject.GetInstanceID());
+            hash.Append(gameObject.GetObjectIdString());
             StreamInfo streamInfo = new StreamInfo(StreamName, StreamType, 1, LSL.LSL.IRREGULAR_RATE,
                 channel_format_t.cf_string, hash.ToString());
             outlet = new StreamOutlet(streamInfo);
@@ -38,7 +39,7 @@ namespace LSL4Unity.Samples.SimplePhysicsEvent
         {
             if (outlet != null)
             {
-                sample[0] = "TriggerEnter " + gameObject.GetInstanceID();
+                sample[0] = "TriggerEnter " + gameObject.GetObjectIdString();
                 // Debug.Log(sample[0]);
                 outlet.push_sample(sample);
             }
@@ -48,7 +49,7 @@ namespace LSL4Unity.Samples.SimplePhysicsEvent
         {
             if (outlet != null)
             {
-                sample[0] = "TriggerExit " + gameObject.GetInstanceID();
+                sample[0] = "TriggerExit " + gameObject.GetObjectIdString();
                 // Debug.Log(sample[0]);
                 outlet.push_sample(sample);
             }

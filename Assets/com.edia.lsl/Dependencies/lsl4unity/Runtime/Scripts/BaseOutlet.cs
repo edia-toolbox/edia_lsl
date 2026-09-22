@@ -45,7 +45,7 @@ namespace LSL4Unity.Utils
             hash.Append(StreamType);
             hash.Append(moment.ToString());
             if (UniqueFromInstanceId)
-                hash.Append(gameObject.GetInstanceID());
+                hash.Append(gameObject.GetObjectIdString());
             ExtendHash(hash);
 
             double dataRate = IrregularRate ? LSL.LSL.IRREGULAR_RATE : LSLCommon.GetSamplingRateFor(moment);

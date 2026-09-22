@@ -90,7 +90,7 @@ namespace Edia.Lsl {
             hash.Append(StreamName);
             hash.Append(StreamType);
             hash.Append(moment.ToString());
-            hash.Append(gameObject.GetInstanceID());
+            hash.Append(gameObject.GetObjectIdString());
             ExtendHash(hash);
 
             double dataRate = IrregularRate ? LSL.LSL.IRREGULAR_RATE : GetSamplingRateFor(moment);

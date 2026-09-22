@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using LSL;
+using LSL4Unity.Utils;
 
 namespace Edia.Lsl {
 
@@ -59,7 +60,7 @@ namespace Edia.Lsl {
             hash.Append(StreamName);
             hash.Append(StreamType);
             if (_isUniqueFromInstanceId)
-                hash.Append(gameObject.GetInstanceID());
+                hash.Append(gameObject.GetObjectIdString());
 
             double samplingRate = 0;
             if (!IrregularRate) {
